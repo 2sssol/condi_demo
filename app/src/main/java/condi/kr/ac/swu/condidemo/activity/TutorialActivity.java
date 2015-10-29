@@ -58,7 +58,7 @@ public class TutorialActivity extends RootActivity {
             txtTutorialSpeechBox4, txtTutorialSpeechBox5, txtTutorialSpeechBox6;
 
     private int days = 0;
-    private double km = 0.0;
+    private float km = 0.00f;
 
 
     @Override
