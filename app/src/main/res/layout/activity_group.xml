@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_alignParentTop="true"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="4dp"
                 android:layout_marginTop="4dp"
                 android:gravity="center_horizontal">
 
@@ -108,7 +108,8 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center">
+                        android:layout_gravity="center"
+                        android:layout_marginTop="-5dp">
 
                         <TextView
                             android:id="@+id/txtPercent"
@@ -129,7 +130,8 @@
                     <!-- 총 진행 정도(텍스트 크기가 같다면 레이아웃 제거) -->
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-5dp">
 
                         <!-- 현재까지 KM -->
                         <TextView
@@ -144,12 +146,12 @@
                             android:layout_height="wrap_content"
                             android:text="KM/"
                             android:textColor="#fafafa"
-                            android:textSize="15sp" />
+                            android:textSize="13sp" />
 
                         <!-- 전체 KM -->
                         <TextView
                             android:id="@+id/txtTotalKM"
-                            android:layout_width="30dp"
+                            android:layout_width="25dp"
                             android:layout_height="wrap_content"
                             android:textColor="#fafafa"
                             android:textSize="11sp" />
