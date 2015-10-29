@@ -88,9 +88,10 @@ public class MyGcmListenerService extends GcmListenerService {
                 break;
             case 2 :    // 부탁 받음
                 intentResponse = new Intent("condi.kr.ac.swu.condiproject.cock");
+                intentResponse.putExtra("message", message);
+                intentResponse.putExtra("sendername", sendername);
                 sendBroadcast(intentResponse);
                 sendNotification(message);
-                showRoomDialog(message, sendername);
                 break;
             case 3 :    // 초대 수락
                 intentResponse = new Intent("condi.kr.ac.swu.condiproject.invite");
@@ -126,9 +127,10 @@ public class MyGcmListenerService extends GcmListenerService {
                 break;
             case 11 :    // 격려 받음
                 intentResponse = new Intent("condi.kr.ac.swu.condiproject.cock");
+                intentResponse.putExtra("message", message);
+                intentResponse.putExtra("sendername", sendername);
                 sendBroadcast(intentResponse);
                 sendNotification(message);
-                showRoomDialog(message, sendername);
                 break;
         }
 
@@ -166,41 +168,6 @@ public class MyGcmListenerService extends GcmListenerService {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
-    }
-
-    public void showRoomDialog(String message, String sendername) {
-
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.custom_dialog);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.getWindow().setLayout(850,450);
-
-        TextView dlgDefaultText_big = (TextView) dialog.findViewById(R.id.dlgDefaultText_big);
-        TextView dlgDefaultText_small = (TextView) dialog.findViewById(R.id.dlgDefaultText_small);
-        Button dlgOk = (Button) dialog.findViewById(R.id.dlgOk);
-
-        dlgDefaultText_big.setText(sendername+"님으로 부터");
-        dlgDefaultText_small.setText(message);
-        dlgOk.setText("확   인");
-
-        dlgOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                isDialogShow = false;
-            }
-        });
-
-        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-
-            }
-        });
-
-        dialog.show();
-        isDialogShow = true;
     }
 
 }
