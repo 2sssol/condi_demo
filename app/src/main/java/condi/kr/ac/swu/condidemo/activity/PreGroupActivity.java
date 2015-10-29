@@ -372,7 +372,7 @@ public class PreGroupActivity extends RootActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            redirectSelectRegionActivity();
+            new MyPHP().execute();
         }
     };
 
@@ -422,8 +422,7 @@ public class PreGroupActivity extends RootActivity {
             Session.removeAllPreferences(getApplicationContext());
             Session.savePreferences(getApplicationContext(), props.get(0));
 
-            startActivity(new Intent(getApplicationContext(), SelectRegionActivity.class));
-            finish();
+            redirectSelectRegionActivity();
         }
     }
 }
