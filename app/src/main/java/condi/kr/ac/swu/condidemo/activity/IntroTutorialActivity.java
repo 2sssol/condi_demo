@@ -44,9 +44,9 @@ public class IntroTutorialActivity extends Activity implements View.OnClickListe
         img_tutorial1 = (NetworkImageView) findViewById(R.id.img_tutorial1);
         img_tutorial2 = (NetworkImageView) findViewById(R.id.img_tutorial2);
         img_tutorial3 = (NetworkImageView) findViewById(R.id.img_tutorial3);
-        setImageURL(img_tutorial1, "img_tutorial1.jpg");
-        setImageURL(img_tutorial2, "img_tutorial2.jpg");
-        setImageURL(img_tutorial3, "img_tutorial3.jpg");
+        setImageURL(img_tutorial1, "img_tutorial1.png");
+        setImageURL(img_tutorial2, "img_tutorial2.png");
+        setImageURL(img_tutorial3, "img_tutorial3.png");
     }
 
     @Override

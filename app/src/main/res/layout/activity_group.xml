@@ -112,7 +112,7 @@
 
                         <TextView
                             android:id="@+id/txtPercent"
-                            android:layout_width="65dp"
+                            android:layout_width="60dp"
                             android:layout_height="wrap_content"
                             android:text="50"
                             android:textColor="#fafafa"
@@ -134,7 +134,7 @@
                         <!-- 현재까지 KM -->
                         <TextView
                             android:id="@+id/txtCurrentKM"
-                            android:layout_width="35dp"
+                            android:layout_width="30dp"
                             android:layout_height="wrap_content"
                             android:textColor="#fafafa"
                             android:textSize="15sp" />
@@ -149,7 +149,7 @@
                         <!-- 전체 KM -->
                         <TextView
                             android:id="@+id/txtTotalKM"
-                            android:layout_width="20dp"
+                            android:layout_width="30dp"
                             android:layout_height="wrap_content"
                             android:textColor="#fafafa"
                             android:textSize="11sp" />
@@ -351,7 +351,7 @@
 
                     <TextView
                         android:id="@+id/pcurrent1_km"
-                        android:layout_width="wrap_content"
+                        android:layout_width="30"
                         android:layout_height="wrap_content"
                         android:text="0.00"
                         android:textColor="#4C4C4C" />
@@ -365,9 +365,9 @@
 
                     <TextView
                         android:id="@+id/pcurrent1_step"
-                        android:layout_width="50dp"
+                        android:layout_width="40dp"
                         android:layout_height="wrap_content"
-                        android:text="600000"
+                        android:text="0"
                         android:textColor="#4C4C4C" />
 
                     <TextView

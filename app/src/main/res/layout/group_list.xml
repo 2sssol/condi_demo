@@ -39,7 +39,7 @@
 
             <TextView
                 android:id="@+id/group_current_km"
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:text="0.00"
                 android:textColor="#4C4C4C" />
@@ -53,7 +53,7 @@
 
             <TextView
                 android:id="@+id/group_current_step"
-                android:layout_width="50dp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:textColor="#4C4C4C" />
