@@ -145,14 +145,14 @@ public class GroupListAdapter extends BaseAdapter {
 
                 while (true) {
                     result = NetworkAction.sendDataToServer(php, dml);
-                    if(result.equals("") || result.isEmpty())
-                        result = "0";
+                    //if(result.equals("") || result.isEmpty())
+                       // result = "0";
 
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
                             step.setText(result);
-                            km.setText(Float.toString((float)Math.round(Integer.parseInt(result) * 0.011559 * 100)/100));
+                            //km.setText(Float.toString((float)Math.round(Integer.parseInt(result) * 0.011559 * 100)/100));
                         }
                     });
 
@@ -172,7 +172,24 @@ public class GroupListAdapter extends BaseAdapter {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showInvitedDialog(receiver, name);
+                new AsyncTask() {
+                    @Override
+                    protected Object doInBackground(Object[] params) {
+                        Properties p = new Properties();
+                        p.setProperty("sender", Session.ID);
+                        p.setProperty("receiver", receiver);
+                        p.setProperty("sendername", Session.NICKNAME);
+                        p.setProperty("type", "2");
+                        return NetworkAction.sendDataToServer("gcmp.php", p);
+                    }
+
+                    @Override
+                    protected void onPostExecute(Object o) {
+                        super.onPostExecute(o);
+
+                        Toast.makeText(context, name + "님에게 '부탁하기'를 했습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }.execute();
             }
         });
     }
