@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -79,6 +81,7 @@ public class GroupActivity extends BaseActivity {
             pname4, pcurrent4_km, pcurrent4_step, pkm4, pcourse4;
     private ImageView groups_cock2, groups_cock3, groups_cock4;
     private RelativeLayout friend1, friend2, friend3;
+    private Properties ps;
 
     // thread
     private Handler graphHandler = new Handler();
@@ -88,6 +91,7 @@ public class GroupActivity extends BaseActivity {
     float currentKM = 0.00f;
 
     private boolean isDialogShow = false;
+    private boolean isOK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -417,7 +421,14 @@ public class GroupActivity extends BaseActivity {
                                     pname2.setText(p.getProperty("mname"));
                                     pcourse2.setText(p.getProperty("cname"));
                                     pkm2.setText(p.getProperty("ckm"));
+                                    ps = p;
+                                    groups_cock2.setOnClickListener(new View.OnClickListener() {
 
+                                        @Override
+                                        public void onClick(View v) {
+                                            showRoomDialog(ps.getProperty("mid"), ps.getProperty("mname"));
+                                        }
+                                    });
                                     dml1 = "select sum(currentwalk) from walk where user = '"+p.getProperty("mid")+"'";
                                 } else if(cnt==1) {
                                     friend2.setVisibility(View.VISIBLE);
@@ -425,7 +436,14 @@ public class GroupActivity extends BaseActivity {
                                     pname3.setText(p.getProperty("mname"));
                                     pcourse3.setText(p.getProperty("cname"));
                                     pkm3.setText(p.getProperty("ckm"));
+                                    ps = p;
+                                    groups_cock3.setOnClickListener(new View.OnClickListener() {
 
+                                        @Override
+                                        public void onClick(View v) {
+                                            showRoomDialog(ps.getProperty("mid"), ps.getProperty("mname"));
+                                        }
+                                    });
                                     dml2 = "select sum(currentwalk) from walk where user = '"+p.getProperty("mid")+"'";
                                 } else {
                                     friend3.setVisibility(View.VISIBLE);
@@ -433,7 +451,14 @@ public class GroupActivity extends BaseActivity {
                                     pname4.setText(p.getProperty("mname"));
                                     pcourse4.setText(p.getProperty("cname"));
                                     pkm4.setText(p.getProperty("ckm"));
+                                    ps = p;
+                                    groups_cock4.setOnClickListener(new View.OnClickListener() {
 
+                                        @Override
+                                        public void onClick(View v) {
+                                            showRoomDialog(ps.getProperty("mid"), ps.getProperty("mname"));
+                                        }
+                                    });
                                     dml3 = "select sum(currentwalk) from walk where user = '"+p.getProperty("mid")+"'";
                                 }
 
@@ -445,8 +470,10 @@ public class GroupActivity extends BaseActivity {
                                     String result = "";
                                     @Override
                                     public void run() {
+                                        Log.d("other's : " , k+"번 째");
                                         if(k==0) {
                                             while(true) {
+                                                Log.d("other's : " , "쓰레드"+k);
                                                 result = NetworkAction.sendDataToServer("memberwalk0.php", dml1);
                                                 if (result.equals("") || result.isEmpty())
                                                     result = "0";
@@ -470,6 +497,7 @@ public class GroupActivity extends BaseActivity {
                                         }
                                         else if(k==1) {
                                             while(true) {
+                                                Log.d("other's : " , "쓰레드"+k);
                                                 result = NetworkAction.sendDataToServer("memberwalk1.php", dml2);
                                                 if(result.equals("") || result.isEmpty())
                                                     result = "0";
@@ -491,7 +519,8 @@ public class GroupActivity extends BaseActivity {
                                         }
                                         else {
                                             while(true) {
-                                                result = NetworkAction.sendDataToServer("memberwalk1.php", dml3);
+                                                Log.d("other's : " , "쓰레드"+k);
+                                                result = NetworkAction.sendDataToServer("memberwalk2.php", dml3);
                                                 if(result.equals("") || result.isEmpty())
                                                     result = "0";
 
@@ -629,4 +658,90 @@ public class GroupActivity extends BaseActivity {
         dialog.show();
         isDialogShow = true;
     }
+
+    public void showRoomDialog(final String receiver, final String name) {
+
+        final Dialog dialog = new Dialog(GroupActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.custom_default_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setLayout(850,450);
+
+        TextView dlgDefaultText_big = (TextView) dialog.findViewById(R.id.customDlgTxt_big);
+        TextView dlgDefaultText_small = (TextView) dialog.findViewById(R.id.customDlgTxt_small);
+        Button dlgOk = (Button) dialog.findViewById(R.id.customDlgBtnOk);
+        Button dlgNo = (Button) dialog.findViewById(R.id.customDlgBtnNo);
+
+        dlgDefaultText_big.setText(name+" 님을 콕 찌르기");
+        dlgDefaultText_small.setText("'콕 찌르기'는 상대방에게 걸음을\n부탁하거나 격려하는 기능입니다.");
+        dlgOk.setText("부탁하기");
+        dlgNo.setText("격려하기");
+
+        dlgOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                isDialogShow = false;
+                isOK = true;
+            }
+        });
+
+        dlgNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                isDialogShow = false;
+                isOK = false;
+            }
+        });
+
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                if(isOK) {
+                    new AsyncTask() {
+                        @Override
+                        protected Object doInBackground(Object[] params) {
+                            Properties p = new Properties();
+                            p.setProperty("sender", Session.ID);
+                            p.setProperty("receiver", receiver);
+                            p.setProperty("sendername", Session.NICKNAME);
+                            p.setProperty("type", "2");
+                            return NetworkAction.sendDataToServer("gcmp.php", p);
+                        }
+
+                        @Override
+                        protected void onPostExecute(Object o) {
+                            super.onPostExecute(o);
+
+                            Toast.makeText(getApplicationContext(), name + "님에게 '부탁하기'를 했습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }.execute();
+                } else {
+                    new AsyncTask() {
+                        @Override
+                        protected Object doInBackground(Object[] params) {
+                            Properties p = new Properties();
+                            p.setProperty("sender", Session.ID);
+                            p.setProperty("receiver", receiver);
+                            p.setProperty("sendername", Session.NICKNAME);
+                            p.setProperty("type", "11");
+                            return NetworkAction.sendDataToServer("gcmp.php", p);
+                        }
+
+                        @Override
+                        protected void onPostExecute(Object o) {
+                            super.onPostExecute(o);
+
+                            Toast.makeText(getApplicationContext(), name + "님에게 '격려하기'를 했습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }.execute();
+                }
+            }
+        });
+
+        dialog.show();
+        isDialogShow = true;
+    }
+
 }
