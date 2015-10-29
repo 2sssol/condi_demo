@@ -38,14 +38,14 @@
                 <!-- 파이 그래프 -->
                 <view
                     android:id="@+id/customCircularRingView"
-                    class="condi.kr.ac.swu.condiproject.view.CustomCircularRingView"
+                    class="condi.kr.ac.swu.condidemo.view.CustomCircularRingView"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_centerHorizontal="true"></view>
 
                 <view
                     android:id="@+id/patchPointView"
-                    class="condi.kr.ac.swu.condiproject.view.PatchPointView"
+                    class="condi.kr.ac.swu.condidemo.view.PatchPointView"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_centerHorizontal="true"></view>
@@ -320,7 +320,7 @@
             android:layout_marginStart="16dp"
             android:background="@drawable/list_background">
 
-            <condi.kr.ac.swu.condiproject.view.CircularNetworkImageView
+            <condi.kr.ac.swu.condidemo.view.CircularNetworkImageView
                 android:id="@+id/p1"
                 android:layout_width="50dp"
                 android:layout_height="50dp"

@@ -31,14 +31,14 @@
             <!-- 파이 그래프 -->
             <view
                 android:id="@+id/customCircularRingView2"
-                class="condi.kr.ac.swu.condiproject.view.CustomCircularRingView2"
+                class="condi.kr.ac.swu.condidemo.view.CustomCircularRingView2"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_centerHorizontal="true"></view>
 
             <view
                 android:id="@+id/patchPointView2"
-                class="condi.kr.ac.swu.condiproject.view.PatchPointView"
+                class="condi.kr.ac.swu.condidemo.view.PatchPointView"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_centerHorizontal="true"></view>

@@ -12,7 +12,7 @@
 		android:orientation="vertical"
 		android:gravity="center">
 
-	<condi.kr.ac.swu.condiproject.view.CircularNetworkImageView
+	<condi.kr.ac.swu.condidemo.view.CircularNetworkImageView
 		android:id="@+id/my_msgProfile"
 		android:layout_width="60dp"
 		android:layout_height="60dp"

@@ -20,7 +20,7 @@
             android:scaleType="centerCrop"
             android:focusable="false"/>
 
-        <condi.kr.ac.swu.condiproject.view.CircularNetworkImageView
+        <condi.kr.ac.swu.condidemo.view.CircularNetworkImageView
             android:id="@+id/imgJoinProfile"
             android:layout_width="142dp"
             android:layout_height="142dp"

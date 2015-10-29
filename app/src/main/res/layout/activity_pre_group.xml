@@ -145,7 +145,7 @@
             android:orientation="horizontal"
             android:padding="2dp">
 
-            <condi.kr.ac.swu.condiproject.view.CircularNetworkImageView
+            <condi.kr.ac.swu.condidemo.view.CircularNetworkImageView
                 android:id="@+id/myProfile"
                 android:layout_width="56dp"
                 android:layout_height="56dp"

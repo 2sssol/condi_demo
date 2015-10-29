@@ -5,7 +5,7 @@
     android:background="@drawable/list_background"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <condi.kr.ac.swu.condiproject.view.CircularNetworkImageView
+    <condi.kr.ac.swu.condidemo.view.CircularNetworkImageView
         android:id="@+id/group_picture"
         android:scaleType="centerCrop"
         android:layout_width="50dp"

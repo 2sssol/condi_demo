@@ -1,9 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    tools:context="condi.kr.ac.swu.condiproject.activity.SettingActivity">
+    android:layout_height="match_parent" >
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -45,7 +43,7 @@
                     android:textSize="18sp" />
 
 
-                <condi.kr.ac.swu.condiproject.view.CircularNetworkImageView
+                <condi.kr.ac.swu.condidemo.view.CircularNetworkImageView
                     android:id="@+id/settingProfile"
                     android:layout_width="100dp"
                     android:layout_height="100dp"

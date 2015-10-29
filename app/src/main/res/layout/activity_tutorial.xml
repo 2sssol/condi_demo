@@ -235,7 +235,7 @@
                 android:layout_centerInParent="true" >
 
                 <!-- text -->
-                <condi.kr.ac.swu.condiproject.view.CurvTextView
+                <condi.kr.ac.swu.condidemo.view.CurvTextView
                     android:id="@+id/txtTutorialCourseArray"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />

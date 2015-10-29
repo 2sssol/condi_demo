@@ -184,13 +184,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         registerReceiver(sensorReceiver, new IntentFilter("condi.kr.ac.swu.condiproject.step"));
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        printErrorMsg("Main onStop");
-        unregisterReceiver(sensorReceiver);
-    }
-
     private BroadcastReceiver sensorReceiver = new BroadcastReceiver() {
 
         @Override

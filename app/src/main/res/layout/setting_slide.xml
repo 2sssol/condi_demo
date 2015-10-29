@@ -19,7 +19,7 @@
             android:orientation="horizontal">
 
 
-            <condi.kr.ac.swu.condiproject.view.CircularNetworkImageView
+            <condi.kr.ac.swu.condidemo.view.CircularNetworkImageView
                 android:id="@+id/slideProfile"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
