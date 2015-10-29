@@ -12,14 +12,14 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="246dp"
+            android:layout_height="240dp"
             android:gravity="center_horizontal">
 
             <!-- 그래프 배경 -->
             <ImageView
                 android:id="@+id/imgGraphBackground"
                 android:layout_width="match_parent"
-                android:layout_height="246dp"
+                android:layout_height="240dp"
                 android:contentDescription="@string/abc_search_hint"
                 android:scaleType="centerCrop"
                 android:src="@drawable/background2" />
@@ -112,7 +112,7 @@
 
                         <TextView
                             android:id="@+id/txtPercent"
-                            android:layout_width="wrap_content"
+                            android:layout_width="65dp"
                             android:layout_height="wrap_content"
                             android:text="50"
                             android:textColor="#fafafa"
@@ -134,33 +134,32 @@
                         <!-- 현재까지 KM -->
                         <TextView
                             android:id="@+id/txtCurrentKM"
-                            android:layout_width="wrap_content"
+                            android:layout_width="35dp"
                             android:layout_height="wrap_content"
                             android:textColor="#fafafa"
-                            android:textSize="16sp" />
+                            android:textSize="15sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="KM/"
                             android:textColor="#fafafa"
-                            android:textSize="16sp" />
+                            android:textSize="15sp" />
 
                         <!-- 전체 KM -->
                         <TextView
                             android:id="@+id/txtTotalKM"
-                            android:layout_width="wrap_content"
+                            android:layout_width="20dp"
                             android:layout_height="wrap_content"
-                            android:text="21.4KM"
                             android:textColor="#fafafa"
-                            android:textSize="12sp" />
+                            android:textSize="11sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="KM"
                             android:textColor="#fafafa"
-                            android:textSize="12sp" />
+                            android:textSize="11sp" />
 
                     </LinearLayout>
                 </LinearLayout>
