@@ -129,14 +129,21 @@ public class GroupListAdapter extends BaseAdapter {
         }
     }
 
-    private void setCurrent(final TextView step, final TextView km, final String id) {
+    private void setCurrent(final TextView step, final TextView km, final String id, final int position) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 String dml = "select count(currentwalk) as count from walk where user='"+id+"'";
+                String php = "";
+                if(position==0)
+                    php = "memberwalk0.php";
+                else if(position==1)
+                    php = "memberwalk1.php";
+                else
+                    php = "memberwalk2.php";
 
                 while (true) {
-                    result = NetworkAction.sendDataToServer("memberwalk0.php", dml);
+                    result = NetworkAction.sendDataToServer(php, dml);
                     if(result.equals("") || result.isEmpty())
                         result = "0";
 
