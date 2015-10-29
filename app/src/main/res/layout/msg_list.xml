@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="100dp"
+    android:background="#fff8ed"
+    android:orientation="horizontal"
+	android:padding="10dp">
+
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		android:gravity="center">
+
+	<condi.kr.ac.swu.condiproject.view.CircularNetworkImageView
+		android:id="@+id/my_msgProfile"
+		android:layout_width="60dp"
+		android:layout_height="60dp"
+		android:scaleType="centerCrop"
+		android:focusable="false"
+		android:src="@drawable/thumb_story"/>
+		
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/my_msg_userName"
+		android:text="유호정"
+		android:textSize="16sp"
+		android:layout_marginTop="2dp"/>
+
+	</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+		android:gravity="center|right"
+		android:layout_marginStart="12dp"
+		android:background="@drawable/background_msg">
+
+		<TextView
+			android:id="@+id/my_msgText"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="유호정 님이 '쿡' 찌르셧어요."
+			android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_msgDate"
+			android:textSize="12sp"
+            android:text="2015년 11월 05일 18:43"/>
+
+	</LinearLayout>
+
+</LinearLayout>
