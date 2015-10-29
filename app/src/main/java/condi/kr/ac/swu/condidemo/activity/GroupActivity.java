@@ -256,7 +256,7 @@ public class GroupActivity extends BaseActivity {
                 while (percent < 100) {
                     String dml = "select sum(currentwalk) as count " +
                             "from walk " +
-                            "where user in (select id from member where groups=" + Session.GROUPS + ")";
+                            "where groups="+Session.GROUPS;
                     result = NetworkAction.sendDataToServer("sum.php", dml);
                     if(result.equals("")||result.isEmpty())
                         result = "0";
@@ -300,7 +300,7 @@ public class GroupActivity extends BaseActivity {
                     });
 
                     try {
-                        Thread.sleep(2000);
+                        Thread.sleep(30);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

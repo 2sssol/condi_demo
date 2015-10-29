@@ -108,7 +108,7 @@ public class GroupListAdapter extends BaseAdapter {
         // button
         setButton(groups_cock, data.get(position).get("mid"), data.get(position).get("mname"));
 
-        setCurrent(group_current_step, group_current_km, data.get(position).get("mid"));
+        //setCurrent(group_current_step, group_current_km, data.get(position).get("mid"));
 
         return convertView;
     }
