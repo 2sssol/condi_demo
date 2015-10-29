@@ -312,7 +312,7 @@
 
         </RelativeLayout>
 
-        <!-- 친구 목록 -->
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -423,6 +423,370 @@
 
         </RelativeLayout>
 
+        <!-- 친구 목록 -->
+        <RelativeLayout
+            android:id="@+id/friend1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/list_background">
+
+            <condi.kr.ac.swu.condidemo.view.CircularNetworkImageView
+                android:id="@+id/p2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:scaleType="centerCrop" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@id/p2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/pname2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="장미희"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp">
+
+                    <TextView
+                        android:id="@+id/pcurrent2_km"
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:text="0.00"
+                        android:textColor="#4C4C4C" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        android:text="KM   |"
+                        android:textColor="#4C4C4C" />
+
+                    <TextView
+                        android:id="@+id/pcurrent2_step"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="#4C4C4C" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="걸음"
+                        android:textColor="#4C4C4C" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="선택코스 : "
+                        android:textColor="#596466"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/pcourse2"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:text="불암산길"
+                        android:textColor="#596466"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/pkm2"
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:text="9.79"
+                        android:textColor="#999"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="km"
+                        android:textColor="#999"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/groups_cock2"
+                android:src="@drawable/icon_cock"
+                android:scaleType="fitCenter"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="25dp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/friend2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/list_background">
+
+            <condi.kr.ac.swu.condidemo.view.CircularNetworkImageView
+                android:id="@+id/p3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:scaleType="centerCrop" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@id/p3"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/pname3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="장미희"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp">
+
+                    <TextView
+                        android:id="@+id/pcurrent3_km"
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:text="0.00"
+                        android:textColor="#4C4C4C" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        android:text="KM   |"
+                        android:textColor="#4C4C4C" />
+
+                    <TextView
+                        android:id="@+id/pcurrent3_step"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="#4C4C4C" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="걸음"
+                        android:textColor="#4C4C4C" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="선택코스 : "
+                        android:textColor="#596466"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/pcourse3"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:text="불암산길"
+                        android:textColor="#596466"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/pkm3"
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:text="9.79"
+                        android:textColor="#999"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="km"
+                        android:textColor="#999"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/groups_cock3"
+                android:src="@drawable/icon_cock"
+                android:scaleType="fitCenter"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="25dp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/friend3"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/list_background">
+
+            <condi.kr.ac.swu.condidemo.view.CircularNetworkImageView
+                android:id="@+id/p4"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:scaleType="centerCrop" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@id/p4"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/pname4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="장미희"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp">
+
+                    <TextView
+                        android:id="@+id/pcurrent4_km"
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:text="0.00"
+                        android:textColor="#4C4C4C" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        android:text="KM   |"
+                        android:textColor="#4C4C4C" />
+
+                    <TextView
+                        android:id="@+id/pcurrent4_step"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="#4C4C4C" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="걸음"
+                        android:textColor="#4C4C4C" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="선택코스 : "
+                        android:textColor="#596466"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/pcourse4"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:text="불암산길"
+                        android:textColor="#596466"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/pkm4"
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:text="9.79"
+                        android:textColor="#999"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="km"
+                        android:textColor="#999"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/groups_cock4"
+                android:src="@drawable/icon_cock"
+                android:scaleType="fitCenter"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="25dp"/>
+
+        </RelativeLayout>
+
         <ListView
             android:id="@+id/groups_lv"
             android:layout_width="match_parent"
@@ -434,10 +798,6 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/fanfare"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible" />
+
 
 </FrameLayout>

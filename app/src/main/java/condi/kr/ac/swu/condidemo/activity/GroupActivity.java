@@ -15,7 +15,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -60,9 +63,22 @@ public class GroupActivity extends BaseActivity {
     private int period = 0;
     private float totalKM;
 
+    private int cnt = 0;
+    private int k = 0;
+    private String dml1, dml2, dml3;
+    private Handler h1 = new Handler();
+    private Handler h2 = new Handler();
+    private Handler h3 = new Handler();
+
     // my
-    private CircularNetworkImageView p1;
-    private TextView pname1, pcurrent1_km, pcurrent1_step, pkm1, pcourse1;
+    private CircularNetworkImageView p1, p2, p3, p4;
+    private TextView
+            pname1, pcurrent1_km, pcurrent1_step, pkm1, pcourse1,
+            pname2, pcurrent2_km, pcurrent2_step, pkm2, pcourse2,
+            pname3, pcurrent3_km, pcurrent3_step, pkm3, pcourse3,
+            pname4, pcurrent4_km, pcurrent4_step, pkm4, pcourse4;
+    private ImageView groups_cock2, groups_cock3, groups_cock4;
+    private RelativeLayout friend1, friend2, friend3;
 
     // thread
     private Handler graphHandler = new Handler();
@@ -336,6 +352,48 @@ public class GroupActivity extends BaseActivity {
                 if(o.equals("success")) {
                     new AsyncTask() {
                         List<Properties> friends;
+
+                        @Override
+                        protected void onPreExecute() {
+                            super.onPreExecute();
+                            p2 = (CircularNetworkImageView) findViewById(R.id.p2);
+                            p3 = (CircularNetworkImageView) findViewById(R.id.p3);
+                            p4 = (CircularNetworkImageView) findViewById(R.id.p4);
+
+                            pname2 = (TextView) findViewById(R.id.pname2);
+                            pname3 = (TextView) findViewById(R.id.pname3);
+                            pname4 = (TextView) findViewById(R.id.pname4);
+
+                            pcurrent2_km = (TextView) findViewById(R.id.pcurrent2_km);
+                            pcurrent3_km = (TextView) findViewById(R.id.pcurrent3_km);
+                            pcurrent4_km = (TextView) findViewById(R.id.pcurrent4_km);
+
+                            pcurrent2_step = (TextView) findViewById(R.id.pcurrent2_step);
+                            pcurrent3_step = (TextView) findViewById(R.id.pcurrent3_step);
+                            pcurrent4_step = (TextView) findViewById(R.id.pcurrent4_step);
+
+                            pcourse2 = (TextView) findViewById(R.id.pcourse2);
+                            pcourse3 = (TextView) findViewById(R.id.pcourse3);
+                            pcourse4 = (TextView) findViewById(R.id.pcourse4);
+
+                            pkm2 = (TextView) findViewById(R.id.pkm2);
+                            pkm3 = (TextView) findViewById(R.id.pkm3);
+                            pkm4 = (TextView) findViewById(R.id.pkm4);
+
+                            groups_cock2 = (ImageView) findViewById(R.id.groups_cock2);
+                            groups_cock3 = (ImageView) findViewById(R.id.groups_cock3);
+                            groups_cock4 = (ImageView) findViewById(R.id.groups_cock4);
+
+                            friend1 = (RelativeLayout) findViewById(R.id.friend1);
+                            friend2 = (RelativeLayout) findViewById(R.id.friend2);
+                            friend3 = (RelativeLayout) findViewById(R.id.friend3);
+
+                            friend1.setVisibility(View.INVISIBLE);
+                            friend2.setVisibility(View.INVISIBLE);
+                            friend3.setVisibility(View.INVISIBLE);
+
+                        }
+
                         @Override
                         protected Object doInBackground(Object[] objects) {
                             try {
@@ -352,14 +410,110 @@ public class GroupActivity extends BaseActivity {
                         protected void onPostExecute(Object o) {
                             super.onPostExecute(o);
 
-                            grouplv = (ListView) findViewById(R.id.groups_lv);
+                            for(Properties p : friends) {
+                                if(cnt==0) {
+                                    friend1.setVisibility(View.VISIBLE);
+                                    setOtherProfileURL(p2, p.getProperty("mprofile"));
+                                    pname2.setText(p.getProperty("mname"));
+                                    pcourse2.setText(p.getProperty("cname"));
+                                    pkm2.setText(p.getProperty("ckm"));
+
+                                    dml1 = "select sum(currentwalk) from walk where user = '"+p.getProperty("mid")+"'";
+                                } else if(cnt==1) {
+                                    friend2.setVisibility(View.VISIBLE);
+                                    setOtherProfileURL(p3, p.getProperty("mprofile"));
+                                    pname3.setText(p.getProperty("mname"));
+                                    pcourse3.setText(p.getProperty("cname"));
+                                    pkm3.setText(p.getProperty("ckm"));
+
+                                    dml2 = "select sum(currentwalk) from walk where user = '"+p.getProperty("mid")+"'";
+                                } else {
+                                    friend3.setVisibility(View.VISIBLE);
+                                    setOtherProfileURL(p4, p.getProperty("mprofile"));
+                                    pname4.setText(p.getProperty("mname"));
+                                    pcourse4.setText(p.getProperty("cname"));
+                                    pkm4.setText(p.getProperty("ckm"));
+
+                                    dml3 = "select sum(currentwalk) from walk where user = '"+p.getProperty("mid")+"'";
+                                }
+
+                                cnt++;
+                            }
+
+                            for(k = 0 ; k<cnt; k++) {
+                                new Thread(new Runnable() {
+                                    String result = "";
+                                    @Override
+                                    public void run() {
+                                        if(k==0) {
+                                            result = NetworkAction.sendDataToServer("memberwalk0.png", dml1);
+                                            if(result.equals("") || result.isEmpty())
+                                                result = "0";
+
+                                            h1.post(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    pcurrent2_step.setText(result);
+                                                    pcurrent2_km.setText(String.format("%s", Math.round(Integer.parseInt(result) * 0.011559 * 100)/100));
+                                                }
+                                            });
+
+
+                                        }
+                                        else if(k==1) {
+                                            result = NetworkAction.sendDataToServer("memberwalk1.png", dml2);
+                                            if(result.equals("") || result.isEmpty())
+                                                result = "0";
+
+                                            h2.post(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    pcurrent3_step.setText(result);
+                                                    pcurrent3_km.setText(String.format("%s", Math.round(Integer.parseInt(result) * 0.011559 * 100)/100));
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            result = NetworkAction.sendDataToServer("memberwalk1.png", dml3);
+                                            if(result.equals("") || result.isEmpty())
+                                                result = "0";
+
+                                            h3.post(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    pcurrent4_step.setText(result);
+                                                    pcurrent4_km.setText(String.format("%s", Math.round(Integer.parseInt(result) * 0.011559 * 100)/100));
+                                                }
+                                            });
+                                        }
+                                    }
+                                }).start();
+                            }
+
+                            /*grouplv = (ListView) findViewById(R.id.groups_lv);
                             adapter = new GroupListAdapter(GroupActivity.this.getApplicationContext(), friends);
-                            grouplv.setAdapter(adapter);
+                            grouplv.setAdapter(adapter);*/
                         }
                     }.execute();
                 }
             }
         }.execute();
+    }
+
+    public void setOtherProfileURL(final CircularNetworkImageView profile, final String profileImageURL) {
+
+        Application app = GlobalApplication.getGlobalApplicationContext();
+        if (app == null)
+            throw new UnsupportedOperationException("needs com.kakao.GlobalApplication in order to use ImageLoader");
+
+        if (profile != null && profileImageURL != null) {
+            if(profileImageURL.equals(""))
+                profile.setImageUrl("http://condi.swu.ac.kr:80/condi2/profile/thumb_story.png", ((GlobalApplication) app).getImageLoader());
+            else
+                profile.setImageUrl("http://condi.swu.ac.kr:80/condi2/profile/"+profileImageURL, ((GlobalApplication) app).getImageLoader());
+        } else  {
+            profile.setImageUrl("http://condi.swu.ac.kr:80/condi2/profile/thumb_story.png", ((GlobalApplication) app).getImageLoader());
+        }
     }
 
     /*
