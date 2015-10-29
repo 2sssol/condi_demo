@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Properties;
 
 import condi.kr.ac.swu.condidemo.R;
+import condi.kr.ac.swu.condidemo.activity.GroupActivity;
 import condi.kr.ac.swu.condidemo.data.GlobalApplication;
 import condi.kr.ac.swu.condidemo.data.NetworkAction;
 import condi.kr.ac.swu.condidemo.data.Session;
