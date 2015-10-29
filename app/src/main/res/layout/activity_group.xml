@@ -351,7 +351,7 @@
 
                     <TextView
                         android:id="@+id/pcurrent1_km"
-                        android:layout_width="30"
+                        android:layout_width="30dp"
                         android:layout_height="wrap_content"
                         android:text="0.00"
                         android:textColor="#4C4C4C" />

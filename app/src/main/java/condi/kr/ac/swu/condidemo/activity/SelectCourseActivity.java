@@ -146,7 +146,7 @@ public class SelectCourseActivity extends RootActivity {
         imageButtons.get(position).setClickable(false);
         textViews.get(position).setVisibility(View.VISIBLE);
         textViews.get(position).setBackgroundResource(R.drawable.speechbubble_pink);
-        textViews.get(position).setText(String.format("%s 님", selector));
+        textViews.get(position).setText(String.format("%s 님 선택", selector));
 
     }
 
@@ -182,7 +182,7 @@ public class SelectCourseActivity extends RootActivity {
             if(i==position) {
                 imageButtons.get(i).setImageResource(R.drawable.course_button_mint);
                 textViews.get(i).setVisibility(View.VISIBLE);
-                textViews.get(i).setText(Session.NICKNAME+"님");
+                textViews.get(i).setText(Session.NICKNAME+"님 선택");
 
                 txtCourseInfoName.setText(courses[i].name);
                 txtChoiceCourseKM.setText(courses[i].km+"KM");
@@ -205,7 +205,7 @@ public class SelectCourseActivity extends RootActivity {
                         imageButtons.get(i).setImageResource(R.drawable.course_button_red);
                         textViews.get(i).setVisibility(View.VISIBLE);
                         textViews.get(i).setBackgroundResource(R.drawable.speechbubble_pink);
-                        textViews.get(i).setText(p.getProperty("nickname")+"님");
+                        textViews.get(i).setText(p.getProperty("nickname")+"님 선택");
                     }
                 }
 
