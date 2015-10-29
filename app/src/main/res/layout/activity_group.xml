@@ -131,7 +131,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="-5dp">
+                        android:layout_marginTop="-7dp">
 
                         <!-- 현재까지 KM -->
                         <TextView
@@ -144,14 +144,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="KM/"
+                            android:text="km/"
                             android:textColor="#fafafa"
                             android:textSize="13sp" />
 
                         <!-- 전체 KM -->
                         <TextView
                             android:id="@+id/txtTotalKM"
-                            android:layout_width="25dp"
+                            android:layout_width="30dp"
                             android:layout_height="wrap_content"
                             android:textColor="#fafafa"
                             android:textSize="11sp" />
@@ -159,9 +159,9 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="KM"
+                            android:text="km"
                             android:textColor="#fafafa"
-                            android:textSize="11sp" />
+                            android:textSize="10sp" />
 
                     </LinearLayout>
                 </LinearLayout>

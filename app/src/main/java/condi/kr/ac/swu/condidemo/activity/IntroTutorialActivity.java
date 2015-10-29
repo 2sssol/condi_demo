@@ -14,7 +14,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.android.volley.toolbox.NetworkImageView;
@@ -25,9 +27,10 @@ import condi.kr.ac.swu.condidemo.data.GlobalApplication;
 
 public class IntroTutorialActivity extends Activity implements View.OnClickListener {
 
-    Button btn_before, btn_next;
+    ImageButton btn_before, btn_next;
     NetworkImageView img_tutorial1, img_tutorial2, img_tutorial3;
     ViewFlipper flipper;
+    TextView txt_tutorial_check;
     int index = 0;
 
     @Override
@@ -35,8 +38,9 @@ public class IntroTutorialActivity extends Activity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro_tutorial);
         flipper = (ViewFlipper) findViewById(R.id.flipper);
-        btn_before = (Button) findViewById(R.id.btn_before);
-        btn_next = (Button) findViewById(R.id.btn_next);
+        btn_before = (ImageButton) findViewById(R.id.btn_before);
+        btn_next = (ImageButton) findViewById(R.id.btn_next);
+        txt_tutorial_check = (TextView)findViewById(R.id.txt_tutorial_check);
 
         btn_before.setOnClickListener(this);
         btn_next.setOnClickListener(this);
@@ -69,6 +73,7 @@ public class IntroTutorialActivity extends Activity implements View.OnClickListe
                 flipper.showNext();
             } else if (index == 1) {
                 btn_before.setVisibility(View.VISIBLE);
+                txt_tutorial_check.setVisibility(View.VISIBLE);
                 index = 2;
                 flipper.showNext();
             } else if (index == 2) {
