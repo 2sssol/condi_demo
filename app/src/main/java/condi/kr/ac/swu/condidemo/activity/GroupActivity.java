@@ -154,7 +154,7 @@ public class GroupActivity extends BaseActivity {
                         Date startDate = new SimpleDateFormat("yyMMdd").parse(results[2]);       // startdate
                         Date today = new Date();
 
-                        period = startDate.compareTo(today);
+                        period = 1;//startDate.compareTo(today);
                         txtCurrentDate.setText(Integer.toString(period));
                     } catch (ParseException e) {
                         e.printStackTrace();

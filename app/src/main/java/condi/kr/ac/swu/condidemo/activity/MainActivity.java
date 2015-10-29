@@ -89,7 +89,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 Intent i = new Intent(getApplicationContext(), GroupActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(i);
-                unregisterReceiver(sensorReceiver);
             }
         });
         btnMyWalk.setOnClickListener(new View.OnClickListener() {

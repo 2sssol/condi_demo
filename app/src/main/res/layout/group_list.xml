@@ -55,7 +55,7 @@
                 android:id="@+id/group_current_step"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:text="600000"
+                android:text="0"
                 android:textColor="#4C4C4C" />
 
             <TextView
