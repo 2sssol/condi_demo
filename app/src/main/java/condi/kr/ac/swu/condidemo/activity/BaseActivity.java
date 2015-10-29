@@ -54,12 +54,18 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initMenu();
-        registerReceiver(cockReceiver,new IntentFilter("condi.kr.ac.swu.condiproject.cock"));
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        registerReceiver(cockReceiver, new IntentFilter("condi.kr.ac.swu.condiproject.cock"));
     }
 
     /*
-    * 초기화 메소드
-    * */
+        * 초기화 메소드
+        * */
     private void initMenu() {
         slidingMenu= new SlidingMenu(this);
         slidingMenu.setMode(SlidingMenu.RIGHT);
@@ -228,5 +234,11 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
 
         dialog.show();
         isDialogShow = true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(cockReceiver);
     }
 }

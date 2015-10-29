@@ -345,6 +345,12 @@ public class SelectCourseActivity extends RootActivity {
         registerReceiver(selectReceiver, new IntentFilter("condi.kr.ac.swu.condiproject.course"));
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(selectReceiver);
+    }
+
     private BroadcastReceiver selectReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
