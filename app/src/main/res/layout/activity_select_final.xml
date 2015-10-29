@@ -10,27 +10,31 @@
         android:layout_height="wrap_content"
         android:text="아직 선택하지 않은 친구에게"
         android:textSize="16sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
+        android:textColor="#444"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="30dp"
         android:id="@+id/txt_final_username"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginStart="16dp" >
+        android:layout_marginStart="30dp" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/push"
+            android:textColor="#444"
             android:textStyle="bold"
             android:textSize="16sp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#444"
             android:text=" 버튼을 눌러 코스 선택을 요청해보세요."
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:layout_marginBottom="4dp"/>
     </LinearLayout>
 
     <RelativeLayout
@@ -43,7 +47,7 @@
             android:src="@drawable/background_sub_city"
             android:scaleType="fitXY"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="110dp"
             android:layout_alignParentBottom="true"
             android:background="@null"/>
 
@@ -339,8 +343,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffecd0"
-        android:orientation="vertical"
-        android:layout_marginTop="4dp">
+        android:orientation="vertical">
 
 
         <RelativeLayout
@@ -348,6 +351,7 @@
             android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginTop="4dp"
             android:background="@drawable/push_list_background">
 
             <TextView
@@ -357,7 +361,7 @@
                 android:textColor="#ffffff"
                 android:gravity="center_vertical|start"
                 android:layout_width="100dp"
-                android:paddingStart="10dp"
+                android:paddingStart="12dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/push_list_name"/>
 
@@ -366,9 +370,10 @@
                 android:id="@+id/txtPushCourseName1"
                 android:text="불암산길"
                 android:textSize="16sp"
+                android:textColor="#333"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="8dp"
                 android:layout_centerInParent="true"
                 android:layout_toEndOf="@+id/txtPushUserName1"/>
 
@@ -377,6 +382,7 @@
                 android:text="9.79"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
+                android:textColor="#333"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:layout_toLeftOf="@+id/txtCourseKm"/>
@@ -385,6 +391,7 @@
                 android:id="@+id/txtCourseKm"
                 android:text=" km"
                 android:textSize="18sp"
+                android:textColor="#333"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
