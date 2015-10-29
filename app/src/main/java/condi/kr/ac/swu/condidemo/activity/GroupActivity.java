@@ -259,7 +259,11 @@ public class GroupActivity extends BaseActivity {
             @Override
             public void run() {
                 String result = "";
-                while (percent < 100) {
+                while (percent <= 100) {
+                    if(percent==100) {
+                        showRoomDialog();
+                        break;
+                    }
                     String dml = "select sum(currentwalk) as count " +
                             "from walk " +
                             "where groups="+Session.GROUPS;
@@ -413,7 +417,7 @@ public class GroupActivity extends BaseActivity {
 
     public void showRoomDialog() {
 
-        final Dialog dialog = new Dialog(this);
+        final Dialog dialog = new Dialog(GroupActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.custom_dialog);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
