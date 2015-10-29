@@ -438,7 +438,8 @@ public class GroupActivity extends BaseActivity {
         dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-
+                startActivity(new Intent(getApplicationContext(), GoalActivity.class));
+                finish();
             }
         });
 
