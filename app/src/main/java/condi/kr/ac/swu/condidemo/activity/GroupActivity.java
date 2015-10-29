@@ -446,45 +446,69 @@ public class GroupActivity extends BaseActivity {
                                     @Override
                                     public void run() {
                                         if(k==0) {
-                                            result = NetworkAction.sendDataToServer("memberwalk0.php", dml1);
-                                            if(result.equals("") || result.isEmpty())
-                                                result = "0";
+                                            while(true) {
+                                                result = NetworkAction.sendDataToServer("memberwalk0.php", dml1);
+                                                if (result.equals("") || result.isEmpty())
+                                                    result = "0";
 
-                                            h1.post(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    pcurrent2_step.setText(result);
-                                                    pcurrent2_km.setText(String.format("%s", Math.round(Integer.parseInt(result) * 0.011559 * 100)/100));
+                                                h1.post(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        pcurrent2_step.setText(result);
+                                                        pcurrent2_km.setText(String.format("%s", Math.round(Integer.parseInt(result) * 0.011559 * 100) / 100));
+                                                    }
+                                                });
+
+                                                try {
+                                                    Thread.sleep(1000);
+                                                } catch (InterruptedException e) {
+                                                    e.printStackTrace();
                                                 }
-                                            });
+                                            }
 
 
                                         }
                                         else if(k==1) {
-                                            result = NetworkAction.sendDataToServer("memberwalk1.php", dml2);
-                                            if(result.equals("") || result.isEmpty())
-                                                result = "0";
+                                            while(true) {
+                                                result = NetworkAction.sendDataToServer("memberwalk1.php", dml2);
+                                                if(result.equals("") || result.isEmpty())
+                                                    result = "0";
 
-                                            h2.post(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    pcurrent3_step.setText(result);
-                                                    pcurrent3_km.setText(String.format("%s", Math.round(Integer.parseInt(result) * 0.011559 * 100)/100));
+                                                h2.post(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        pcurrent3_step.setText(result);
+                                                        pcurrent3_km.setText(String.format("%s", Math.round(Integer.parseInt(result) * 0.011559 * 100)/100));
+                                                    }
+                                                });
+
+                                                try {
+                                                    Thread.sleep(1000);
+                                                } catch (InterruptedException e) {
+                                                    e.printStackTrace();
                                                 }
-                                            });
+                                            }
                                         }
                                         else {
-                                            result = NetworkAction.sendDataToServer("memberwalk1.php", dml3);
-                                            if(result.equals("") || result.isEmpty())
-                                                result = "0";
+                                            while(true) {
+                                                result = NetworkAction.sendDataToServer("memberwalk1.php", dml3);
+                                                if(result.equals("") || result.isEmpty())
+                                                    result = "0";
 
-                                            h3.post(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    pcurrent4_step.setText(result);
-                                                    pcurrent4_km.setText(String.format("%s", Math.round(Integer.parseInt(result) * 0.011559 * 100)/100));
+                                                h3.post(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        pcurrent4_step.setText(result);
+                                                        pcurrent4_km.setText(String.format("%s", Math.round(Integer.parseInt(result) * 0.011559 * 100)/100));
+                                                    }
+                                                });
+
+                                                try {
+                                                    Thread.sleep(1000);
+                                                } catch (InterruptedException e) {
+                                                    e.printStackTrace();
                                                 }
-                                            });
+                                            }
                                         }
                                     }
                                 }).start();
