@@ -85,7 +85,7 @@ public class GroupActivity extends BaseActivity {
     private Thread th;
     int percent = 0;
     int currentStep = 0;
-    long currentKM = 0;
+    float currentKM = 0.00f;
 
     private boolean isDialogShow = false;
 
@@ -228,13 +228,13 @@ public class GroupActivity extends BaseActivity {
                                 }
                             }
 
-                            double[] km = new double[list.size()];
+                            float[] km = new float[list.size()];
                             int cnt = 0;
                             int sum = 0;
                             List<Integer> points = new ArrayList<Integer>();
                             for(Properties p : list) {
                                 points.add(sum);
-                                km[cnt] = Double.parseDouble(p.getProperty("km"));
+                                km[cnt] = Float.parseFloat(p.getProperty("km"));
                                 sum +=(int)(km[cnt]/totalKM*100);
 
                                 switch (cnt) {
@@ -446,7 +446,7 @@ public class GroupActivity extends BaseActivity {
                                     @Override
                                     public void run() {
                                         if(k==0) {
-                                            result = NetworkAction.sendDataToServer("memberwalk0.png", dml1);
+                                            result = NetworkAction.sendDataToServer("memberwalk0.php", dml1);
                                             if(result.equals("") || result.isEmpty())
                                                 result = "0";
 
@@ -461,7 +461,7 @@ public class GroupActivity extends BaseActivity {
 
                                         }
                                         else if(k==1) {
-                                            result = NetworkAction.sendDataToServer("memberwalk1.png", dml2);
+                                            result = NetworkAction.sendDataToServer("memberwalk1.php", dml2);
                                             if(result.equals("") || result.isEmpty())
                                                 result = "0";
 
@@ -474,7 +474,7 @@ public class GroupActivity extends BaseActivity {
                                             });
                                         }
                                         else {
-                                            result = NetworkAction.sendDataToServer("memberwalk1.png", dml3);
+                                            result = NetworkAction.sendDataToServer("memberwalk1.php", dml3);
                                             if(result.equals("") || result.isEmpty())
                                                 result = "0";
 
