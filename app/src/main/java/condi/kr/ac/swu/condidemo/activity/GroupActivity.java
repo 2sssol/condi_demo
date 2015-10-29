@@ -1,15 +1,19 @@
 package condi.kr.ac.swu.condidemo.activity;
 
 import android.app.Application;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -66,6 +70,8 @@ public class GroupActivity extends BaseActivity {
     int percent = 0;
     int currentStep = 0;
     long currentKM = 0;
+
+    private boolean isDialogShow = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -403,5 +409,40 @@ public class GroupActivity extends BaseActivity {
         } else  {
             profile.setImageUrl("http://condi.swu.ac.kr:80/condi2/profile/thumb_story.png", ((GlobalApplication) app).getImageLoader());
         }
+    }
+
+    public void showRoomDialog() {
+
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.custom_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setLayout(850,450);
+
+        TextView dlgDefaultText_big = (TextView) dialog.findViewById(R.id.dlgDefaultText_big);
+        TextView dlgDefaultText_small = (TextView) dialog.findViewById(R.id.dlgDefaultText_small);
+        Button dlgOk = (Button) dialog.findViewById(R.id.dlgOk);
+
+        dlgDefaultText_big.setText("목 표 달 성");
+        dlgDefaultText_small.setText("목표에 달성했습니다!\n축하드립니다!");
+        dlgOk.setText("확   인");
+
+        dlgOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                isDialogShow = false;
+            }
+        });
+
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+
+            }
+        });
+
+        dialog.show();
+        isDialogShow = true;
     }
 }

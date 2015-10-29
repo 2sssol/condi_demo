@@ -139,7 +139,7 @@ public class TutorialActivity extends RootActivity {
             textViews.get(position).setBackgroundResource(R.drawable.speechbubble_pink);
         }
 
-        textViews.get(position).setText(String.format("%s 님", selector));
+        textViews.get(position).setText(String.format("%s 님 선택", selector));
 
     }
 
