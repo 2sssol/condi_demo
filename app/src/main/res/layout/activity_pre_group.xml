@@ -159,6 +159,11 @@
                 android:orientation="vertical"
                 android:layout_marginStart="15dp">
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/myName"
                     android:layout_width="wrap_content"
@@ -167,6 +172,18 @@
                     android:textColor="#000000"
                     android:textSize="16sp" />
 
+
+                    <TextView
+                        android:layout_width="20dp"
+                        android:layout_height="13dp"
+                        android:text="나"
+                        android:layout_marginStart="30dp"
+                        android:textSize="10sp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#fff"
+                        android:background="@drawable/pre_me_bg"/>
+                </LinearLayout>
                 <TextView
                     android:id="@+id/myPhone"
                     android:layout_width="wrap_content"
