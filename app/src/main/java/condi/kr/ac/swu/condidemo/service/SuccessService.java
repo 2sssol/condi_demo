@@ -6,8 +6,10 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 import java.util.Properties;
+import java.util.TooManyListenersException;
 
 import condi.kr.ac.swu.condidemo.data.NetworkAction;
 import condi.kr.ac.swu.condidemo.data.Session;
@@ -37,7 +39,9 @@ public class SuccessService extends Service {
                     if(result.equals("")||result.isEmpty())
                         result = "0";
 
-                    if(result.equals(goalkm)) {
+                    String km = String.format("%s", ( Math.round(Integer.parseInt(result) * 0.011559 * 100)/100));
+
+                    if(km.equals(goalkm)) {
                         new AsyncTask() {
                             @Override
                             protected Object doInBackground(Object[] params) {
@@ -47,6 +51,12 @@ public class SuccessService extends Service {
                                 p.setProperty("sendername", name);
                                 p.setProperty("type", "9");
                                 return NetworkAction.sendDataToServer("gcm.php", p, dml);
+                            }
+
+                            @Override
+                            protected void onPostExecute(Object o) {
+                                super.onPostExecute(o);
+                                Toast.makeText(getApplicationContext(), "목표달성", Toast.LENGTH_LONG).show();
                             }
                         }.execute();
                         break;
