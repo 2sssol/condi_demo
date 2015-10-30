@@ -472,6 +472,7 @@ public class GroupActivity extends BaseActivity {
                                         Log.d("other's : " , "쓰레드1");
                                         otherCurrent1  = NetworkAction.sendDataToServer("memberwalk0.php", dml1);
                                         Log.d("other's otherCurrent1:" , otherCurrent1);
+                                        Log.d("dml1:" , dml1);
                                         if (otherCurrent1.equals("") || otherCurrent1.isEmpty())
                                             otherCurrent1 = "0";
 
@@ -500,6 +501,7 @@ public class GroupActivity extends BaseActivity {
                                         Log.d("other's : " , "쓰레드2");
                                         otherCurrent2  = NetworkAction.sendDataToServer("memberwalk1.php", dml2);
                                         Log.d("other's otherCurrent2:" , otherCurrent2);
+                                        Log.d("dml2:" , dml2);
                                         if (otherCurrent2.equals("") || otherCurrent2.isEmpty())
                                             otherCurrent2 = "0";
 
@@ -528,6 +530,7 @@ public class GroupActivity extends BaseActivity {
                                         Log.d("other's : " , "쓰레드3");
                                         otherCurrent3  = NetworkAction.sendDataToServer("memberwalk2.php", dml3);
                                         Log.d("other's otherCurrent3:" , otherCurrent3);
+                                        Log.d("dml3:" , dml3);
                                         if (otherCurrent3.equals("") || otherCurrent3.isEmpty())
                                             otherCurrent3 = "0";
 
