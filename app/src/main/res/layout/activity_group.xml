@@ -136,10 +136,10 @@
                         <!-- 현재까지 KM -->
                         <TextView
                             android:id="@+id/txtCurrentKM"
-                            android:layout_width="30dp"
+                            android:layout_width="40dp"
                             android:layout_height="wrap_content"
                             android:textColor="#fafafa"
-                            android:textSize="15sp" />
+                            android:textSize="13sp" />
 
                         <TextView
                             android:layout_width="wrap_content"

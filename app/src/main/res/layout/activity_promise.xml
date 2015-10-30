@@ -152,6 +152,6 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:gravity="center|center_horizontal"
-        android:text="아직 약속된 일정이 없네요.\n친구들과 함께할 일정을 만들어 보세요!"
+        android:text=""
         android:visibility="visible" />
 </RelativeLayout>
