@@ -133,9 +133,9 @@ public class GroupActivity extends BaseActivity {
         pcurrent1_step = (TextView) findViewById(R.id.pcurrent1_step);
         pcourse1 = (TextView) findViewById(R.id.pcourse1);
         pkm1 = (TextView) findViewById(R.id.pkm1);
+
         setMy();
         setOther();
-
         setMyView();
 
         btnTodolist.setOnClickListener(new View.OnClickListener() {
@@ -292,6 +292,9 @@ public class GroupActivity extends BaseActivity {
                     currentStep = Integer.parseInt(result);
                     currentKM = Math.round(currentStep * 0.011559 * 100)/100;
                     percent = (int)((float) currentKM / totalKM *100);
+                    Log.i("currentKM", Float.toString(currentKM));
+                    Log.i("percent", Integer.toString(percent));
+
 
                     graphHandler.post(new Runnable() {
                         @Override

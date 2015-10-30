@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.Properties;
@@ -40,6 +41,8 @@ public class SuccessService extends Service {
                         result = "0";
 
                     String km = String.format("%s", ( Math.round(Integer.parseInt(result) * 0.011559 * 100)/100));
+                    Log.i("gaal", goalkm);
+                    Log.i("km", km);
 
                     if(km.equals(goalkm)) {
                         new AsyncTask() {
