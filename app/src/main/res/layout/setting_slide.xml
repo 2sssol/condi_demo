@@ -17,7 +17,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
 
 
             <condi.kr.ac.swu.condidemo.view.CircularNetworkImageView
@@ -75,10 +76,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:id="@+id/see_more_msg"
         android:text="더보기 >  "
-        android:textSize="20sp"
+        android:textSize="18sp"
 		android:clickable="true"
         android:textColor="#4f4b48"
         android:layout_gravity="end"/>
@@ -87,7 +88,7 @@
     <ListView
 		android:id="@+id/lvMsg"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="240dp"
         android:divider="#fff"/>
 
     <LinearLayout
