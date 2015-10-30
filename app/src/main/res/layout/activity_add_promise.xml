@@ -54,7 +54,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:mcv_showOtherDates="all"
-                app:mcv_selectionColor="#fc5151" />
+                app:mcv_selectionColor="#fc5151"
+                android:background="#e6e6e6"
+                android:layout_marginTop="8dp"/>
 
             <!--시간-->
             <RelativeLayout
@@ -76,6 +78,8 @@
                     android:text="시간"
                     android:textSize="18sp"
                     android:layout_marginEnd="16dp"
+                    android:background="#e6e6e6"
+                    android:layout_marginTop="8dp"
                     android:id="@+id/time_txt"
                     android:layout_toEndOf="@id/sch_time_icon" />
 
@@ -131,7 +135,7 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="22dp">
+                android:layout_marginTop="26dp">
 
                 <ImageView
                     android:layout_width="24dp"
@@ -222,7 +226,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="bottom|center_horizontal">
+                android:gravity="bottom|center_horizontal"
+                android:layout_marginTop="20dp">
 
                 <Button
                     android:id="@+id/cancelPromise"
