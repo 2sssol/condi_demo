@@ -169,7 +169,7 @@ public class GroupActivity extends BaseActivity {
                 else {
                     results = o.toString().split("/");
                     txtTotalDate.setText(results[0]);
-                    txtTotalKM.setText(results[1]);
+                    txtTotalKM.setText(results[1].substring(0,4));
                     totalKM = Float.parseFloat(results[1]);
 
                     printErrorMsg("totalKM : " + totalKM);
@@ -285,10 +285,8 @@ public class GroupActivity extends BaseActivity {
                     if(result.equals("")||result.isEmpty())
                         result = "0";
                     currentStep = Integer.parseInt(result);
-                    currentKM = Math.round(currentStep * 0.011559 * 100)/100;
+                    currentKM = (float) (currentStep * 0.011559);//Math.round(currentStep * 0.011559 * 100)/100;
                     percent = (int)((float) currentKM / totalKM *100);
-                    Log.i("currentKM", Float.toString(currentKM));
-                    Log.i("percent", Integer.toString(percent));
 
                     graphHandler.post(new Runnable() {
                         @Override
@@ -298,7 +296,7 @@ public class GroupActivity extends BaseActivity {
                             myView.invalidate();
 
                             txtPercent.setText(String.format("%s",percent));
-                            txtCurrentKM.setText(Float.toString(currentKM));
+                            txtCurrentKM.setText(String.format("%.2f", currentKM));
 
                             if(currentKM > courseKm1) {
                                 if(currentKM > courseKm1+courseKm2) {

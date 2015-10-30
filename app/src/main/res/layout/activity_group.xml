@@ -117,7 +117,7 @@
                             android:layout_height="wrap_content"
                             android:text="50"
                             android:textColor="#fafafa"
-                            android:textSize="10sp" />
+                            android:textSize="50sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
