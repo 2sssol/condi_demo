@@ -1,13 +1,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="condi.kr.ac.swu.condiproject.activity.MyMsgActivity">
+    android:layout_height="match_parent"
+    android:padding="12dp"
+    android:background="#fff8ed">
 
     <ListView
         android:id="@+id/msg_list"
+        android:dividerHeight="6dp"
+        android:divider="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
