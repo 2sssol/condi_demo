@@ -286,7 +286,7 @@ public class GroupActivity extends BaseActivity {
                         result = "0";
                     currentStep = Integer.parseInt(result);
                     currentKM = (float) (currentStep * 0.011559);//Math.round(currentStep * 0.011559 * 100)/100;
-                    percent = (int)((float) currentKM / totalKM *100);
+                    percent = Math.round((currentKM / totalKM) * 100);
 
                     graphHandler.post(new Runnable() {
                         @Override
