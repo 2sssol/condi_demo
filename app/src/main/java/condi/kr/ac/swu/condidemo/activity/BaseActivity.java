@@ -283,5 +283,22 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStop() {
         super.onStop();
         unregisterReceiver(cockReceiver);
+        unregisterReceiver(goalReceiver);
     }
+
+
+    private void setSuccess() {
+        new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] params) {
+                Properties p = new Properties();
+                String dml = "select * from member where id='"+Session.ID+"'";
+                p.setProperty("sender", Session.ID);
+                p.setProperty("sendername", Session.NICKNAME);
+                p.setProperty("type", "9");
+                return NetworkAction.sendDataToServer("gcm.php", p, dml);
+            }
+        }.execute();
+    }
+
 }

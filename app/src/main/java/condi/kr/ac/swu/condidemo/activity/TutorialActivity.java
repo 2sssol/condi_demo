@@ -4,7 +4,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -28,6 +30,7 @@ import condi.kr.ac.swu.condidemo.data.Course;
 import condi.kr.ac.swu.condidemo.data.NetworkAction;
 import condi.kr.ac.swu.condidemo.data.Session;
 import condi.kr.ac.swu.condidemo.service.AccSensor;
+import condi.kr.ac.swu.condidemo.service.SuccessService;
 import condi.kr.ac.swu.condidemo.view.CurvTextView;
 
 
@@ -261,6 +264,12 @@ public class TutorialActivity extends RootActivity {
 
                                             txtTutorialDaysSum.setText(Integer.toString(days));
                                             txtTutorialCourseSum.setText(String.format("%.1f KM" , km));
+
+                                            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                                            SharedPreferences.Editor editor = pref.edit();
+                                            editor.putString("goalkm", String.format("%s",km));
+                                            editor.putString("goaldays", String.format("%s",days));
+                                            editor.commit();
                                         }
                                     }.execute();
                                 }
@@ -295,6 +304,7 @@ public class TutorialActivity extends RootActivity {
                 if(o.equals("success")) {
                     toastErrorMsg("어울림을 시작합니다.");
                     startSensor();
+                    startService(new Intent(getApplicationContext(), SuccessService.class));
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 } else {

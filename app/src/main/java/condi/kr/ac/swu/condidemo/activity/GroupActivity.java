@@ -306,7 +306,7 @@ public class GroupActivity extends BaseActivity {
                                 if(currentKM > courseKm1+courseKm2) {
                                     if(currentKM > courseKm1+courseKm2+courseKm3) {
                                         if(currentKM > courseKm1+courseKm2+courseKm3+courseKm4) {
-                                            setSuccess();
+                                            percent = 100;
                                         } else {
                                             txtCourseName1.setBackgroundResource(R.drawable.route_blank_filled);
                                             txtCourseName2.setBackgroundResource(R.drawable.route_blank_filled);
@@ -643,49 +643,13 @@ public class GroupActivity extends BaseActivity {
         }
     }
 
-    public void showRoomDialog() {
-
-        final Dialog dialog = new Dialog(GroupActivity.this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.custom_dialog);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.getWindow().setLayout(850,450);
-
-        TextView dlgDefaultText_big = (TextView) dialog.findViewById(R.id.dlgDefaultText_big);
-        TextView dlgDefaultText_small = (TextView) dialog.findViewById(R.id.dlgDefaultText_small);
-        Button dlgOk = (Button) dialog.findViewById(R.id.dlgOk);
-
-        dlgDefaultText_big.setText("목 표 달 성");
-        dlgDefaultText_small.setText("목표에 달성했습니다!\n축하드립니다!");
-        dlgOk.setText("확   인");
-
-        dlgOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                isDialogShow = false;
-            }
-        });
-
-        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                startActivity(new Intent(getApplicationContext(), GoalActivity.class));
-                finish();
-            }
-        });
-
-        dialog.show();
-        isDialogShow = true;
-    }
-
     public void showCockDialog(final String receiver, final String name) {
 
         final Dialog dialog = new Dialog(GroupActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.custom_default_dialog);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.getWindow().setLayout(850,450);
+        dialog.getWindow().setLayout(850,500);
 
         TextView dlgDefaultText_big = (TextView) dialog.findViewById(R.id.customDlgTxt_big);
         TextView dlgDefaultText_small = (TextView) dialog.findViewById(R.id.customDlgTxt_small);
@@ -762,21 +726,6 @@ public class GroupActivity extends BaseActivity {
 
         dialog.show();
         isDialogShow = true;
-    }
-
-
-    private void setSuccess() {
-        new AsyncTask() {
-            @Override
-            protected Object doInBackground(Object[] params) {
-                Properties p = new Properties();
-                String dml = "select * from member where id='"+Session.ID+"'";
-                p.setProperty("sender", Session.ID);
-                p.setProperty("sendername", Session.NICKNAME);
-                p.setProperty("type", "9");
-                return NetworkAction.sendDataToServer("gcm.php", p, dml);
-            }
-        }.execute();
     }
 
 

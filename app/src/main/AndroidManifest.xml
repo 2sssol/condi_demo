@@ -188,6 +188,12 @@
             android:name=".activity.GoalActivity"
             android:label="@string/title_activity_goal" >
         </activity>
+
+        <service
+            android:name=".service.SuccessService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>
