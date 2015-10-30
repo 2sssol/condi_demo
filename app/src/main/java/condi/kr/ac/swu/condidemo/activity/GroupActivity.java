@@ -10,13 +10,11 @@ import android.content.IntentFilter;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -65,7 +63,8 @@ public class GroupActivity extends BaseActivity {
     private int period = 0;
     private float totalKM;
 
-    private int cnt = 0;
+    private int friendCount = 0;
+    private String otherCurrent1, otherCurrent2,  otherCurrent3;
     private int k = 0;
     private String dml1, dml2, dml3;
     private Handler h1 = new Handler();
@@ -280,8 +279,8 @@ public class GroupActivity extends BaseActivity {
             public void run() {
                 String result = "";
                 while (percent <= 100) {
-                    if(percent==100) {
-                        showRoomDialog();
+                    if(percent > 100) {
+                        percent = 100;
                         break;
                     }
                     String dml = "select sum(currentwalk) as count " +
@@ -307,7 +306,7 @@ public class GroupActivity extends BaseActivity {
                                 if(currentKM > courseKm1+courseKm2) {
                                     if(currentKM > courseKm1+courseKm2+courseKm3) {
                                         if(currentKM > courseKm1+courseKm2+courseKm3+courseKm4) {
-                                            toastErrorMsg("목표에 도달하셨습니다.");
+                                            setSuccess();
                                         } else {
                                             txtCourseName1.setBackgroundResource(R.drawable.route_blank_filled);
                                             txtCourseName2.setBackgroundResource(R.drawable.route_blank_filled);
@@ -415,132 +414,144 @@ public class GroupActivity extends BaseActivity {
                             super.onPostExecute(o);
 
                             for(Properties p : friends) {
-                                if(cnt==0) {
+                                if(friendCount ==0) {
                                     friend1.setVisibility(View.VISIBLE);
                                     setOtherProfileURL(p2, p.getProperty("mprofile"));
                                     pname2.setText(p.getProperty("mname"));
                                     pcourse2.setText(p.getProperty("cname"));
                                     pkm2.setText(p.getProperty("ckm"));
-                                    ps = p;
                                     groups_cock2.setOnClickListener(new View.OnClickListener() {
 
                                         @Override
                                         public void onClick(View v) {
-                                            showRoomDialog(ps.getProperty("mid"), ps.getProperty("mname"));
+                                            showCockDialog(friends.get(0).getProperty("mid"), friends.get(0).getProperty("mname"));
                                         }
                                     });
-                                    dml1 = "select sum(currentwalk) from walk where user = '"+p.getProperty("mid")+"'";
-                                } else if(cnt==1) {
+
+                                    dml1 = "select sum(currentwalk) from walk where user = '"+friends.get(0).getProperty("mid")+"'";
+
+                                } else if(friendCount ==1) {
                                     friend2.setVisibility(View.VISIBLE);
                                     setOtherProfileURL(p3, p.getProperty("mprofile"));
                                     pname3.setText(p.getProperty("mname"));
                                     pcourse3.setText(p.getProperty("cname"));
                                     pkm3.setText(p.getProperty("ckm"));
-                                    ps = p;
                                     groups_cock3.setOnClickListener(new View.OnClickListener() {
 
                                         @Override
                                         public void onClick(View v) {
-                                            showRoomDialog(ps.getProperty("mid"), ps.getProperty("mname"));
+                                            showCockDialog(friends.get(1).getProperty("mid"), friends.get(1).getProperty("mname"));
                                         }
                                     });
-                                    dml2 = "select sum(currentwalk) from walk where user = '"+p.getProperty("mid")+"'";
+                                    dml2 = "select sum(currentwalk) from walk where user = '"+friends.get(1).getProperty("mid")+"'";
                                 } else {
                                     friend3.setVisibility(View.VISIBLE);
                                     setOtherProfileURL(p4, p.getProperty("mprofile"));
                                     pname4.setText(p.getProperty("mname"));
                                     pcourse4.setText(p.getProperty("cname"));
                                     pkm4.setText(p.getProperty("ckm"));
-                                    ps = p;
                                     groups_cock4.setOnClickListener(new View.OnClickListener() {
 
                                         @Override
                                         public void onClick(View v) {
-                                            showRoomDialog(ps.getProperty("mid"), ps.getProperty("mname"));
+                                            showCockDialog(friends.get(2).getProperty("mid"), friends.get(2).getProperty("mname"));
                                         }
                                     });
-                                    dml3 = "select sum(currentwalk) from walk where user = '"+p.getProperty("mid")+"'";
+                                    dml3 = "select sum(currentwalk) from walk where user = '"+friends.get(2).getProperty("mid")+"'";
                                 }
 
-                                cnt++;
+                                friendCount++;
                             }
 
-                            for(k = 0 ; k<cnt; k++) {
-                                new Thread(new Runnable() {
-                                    String result = "";
-                                    @Override
-                                    public void run() {
-                                        Log.d("other's : " , k+"번 째");
-                                        if(k==0) {
-                                            while(true) {
-                                                Log.d("other's : " , "쓰레드"+k);
-                                                result = NetworkAction.sendDataToServer("memberwalk0.php", dml1);
-                                                if (result.equals("") || result.isEmpty())
-                                                    result = "0";
+                            Thread th1, th2, th3;
 
-                                                h1.post(new Runnable() {
-                                                    @Override
-                                                    public void run() {
-                                                        pcurrent2_step.setText(result);
-                                                        pcurrent2_km.setText(String.format("%s", Math.round(Integer.parseInt(result) * 0.011559 * 100) / 100));
-                                                    }
-                                                });
+                            th1 = new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    while(true) {
+                                        Log.d("other's : " , "쓰레드1");
+                                        otherCurrent1  = NetworkAction.sendDataToServer("memberwalk0.php", dml1);
+                                        if (otherCurrent1.equals("") || otherCurrent1.isEmpty())
+                                            otherCurrent1 = "0";
 
-                                                try {
-                                                    Thread.sleep(1000);
-                                                } catch (InterruptedException e) {
-                                                    e.printStackTrace();
-                                                }
+                                        h1.post(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                pcurrent2_step.setText(otherCurrent1);
+                                                pcurrent2_km.setText(String.format("%s", Math.round(Integer.parseInt(otherCurrent1) * 0.011559 * 100) / 100));
                                             }
+                                        });
 
-
-                                        }
-                                        else if(k==1) {
-                                            while(true) {
-                                                Log.d("other's : " , "쓰레드"+k);
-                                                result = NetworkAction.sendDataToServer("memberwalk1.php", dml2);
-                                                if(result.equals("") || result.isEmpty())
-                                                    result = "0";
-
-                                                h2.post(new Runnable() {
-                                                    @Override
-                                                    public void run() {
-                                                        pcurrent3_step.setText(result);
-                                                        pcurrent3_km.setText(String.format("%s", Math.round(Integer.parseInt(result) * 0.011559 * 100)/100));
-                                                    }
-                                                });
-
-                                                try {
-                                                    Thread.sleep(1000);
-                                                } catch (InterruptedException e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                        }
-                                        else {
-                                            while(true) {
-                                                Log.d("other's : " , "쓰레드"+k);
-                                                result = NetworkAction.sendDataToServer("memberwalk2.php", dml3);
-                                                if(result.equals("") || result.isEmpty())
-                                                    result = "0";
-
-                                                h3.post(new Runnable() {
-                                                    @Override
-                                                    public void run() {
-                                                        pcurrent4_step.setText(result);
-                                                        pcurrent4_km.setText(String.format("%s", Math.round(Integer.parseInt(result) * 0.011559 * 100)/100));
-                                                    }
-                                                });
-
-                                                try {
-                                                    Thread.sleep(1000);
-                                                } catch (InterruptedException e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
+                                        try {
+                                            Thread.sleep(1000);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
                                         }
                                     }
-                                }).start();
+                                }
+                            });
+
+                            th2 = new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    while(true) {
+                                        Log.d("other's : " , "쓰레드2");
+                                        otherCurrent2  = NetworkAction.sendDataToServer("memberwalk1.php", dml2);
+                                        if (otherCurrent2.equals("") || otherCurrent2.isEmpty())
+                                            otherCurrent2 = "0";
+
+                                        h2.post(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                pcurrent3_step.setText(otherCurrent2);
+                                                pcurrent3_km.setText(String.format("%s", Math.round(Integer.parseInt(otherCurrent2) * 0.011559 * 100) / 100));
+                                            }
+                                        });
+
+                                        try {
+                                            Thread.sleep(1000);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+                            });
+
+                            th3 = new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    while(true) {
+                                        Log.d("other's : " , "쓰레드3");
+                                        otherCurrent3  = NetworkAction.sendDataToServer("memberwalk2.php", dml3);
+                                        if (otherCurrent3.equals("") || otherCurrent3.isEmpty())
+                                            otherCurrent3 = "0";
+
+                                        h3.post(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                pcurrent4_step.setText(otherCurrent3);
+                                                pcurrent4_km.setText(String.format("%s", Math.round(Integer.parseInt(otherCurrent3) * 0.011559 * 100) / 100));
+                                            }
+                                        });
+
+                                        try {
+                                            Thread.sleep(1000);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+                            });
+
+                            if(friends.size() == 3 ) {
+                                th1.start();
+                                th2.start();
+                                th3.start();
+                            } else if( friends.size() == 2) {
+                                th1.start();
+                                th2.start();
+                            } else {
+                                th1.start();
                             }
 
                             /*grouplv = (ListView) findViewById(R.id.groups_lv);
@@ -659,7 +670,7 @@ public class GroupActivity extends BaseActivity {
         isDialogShow = true;
     }
 
-    public void showRoomDialog(final String receiver, final String name) {
+    public void showCockDialog(final String receiver, final String name) {
 
         final Dialog dialog = new Dialog(GroupActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -743,5 +754,21 @@ public class GroupActivity extends BaseActivity {
         dialog.show();
         isDialogShow = true;
     }
+
+
+    private void setSuccess() {
+        new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] params) {
+                Properties p = new Properties();
+                String dml = "select * from member where id='"+Session.ID+"'";
+                p.setProperty("sender", Session.ID);
+                p.setProperty("sendername", Session.NICKNAME);
+                p.setProperty("type", "9");
+                return NetworkAction.sendDataToServer("gcm.php", p, dml);
+            }
+        }.execute();
+    }
+
 
 }

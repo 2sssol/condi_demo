@@ -120,6 +120,8 @@ public class MyGcmListenerService extends GcmListenerService {
                 sendNotification(message);
                 break;
             case 9 :    // 목표 달성
+                intentResponse = new Intent("condi.kr.ac.swu.condiproject.success");
+                sendBroadcast(intentResponse);
                 break;
             case 10 :    // 초대 취소
                 intentResponse = new Intent("condi.kr.ac.swu.condiproject.invite");

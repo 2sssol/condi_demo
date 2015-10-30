@@ -61,6 +61,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
         registerReceiver(cockReceiver, new IntentFilter("condi.kr.ac.swu.condiproject.cock"));
+        registerReceiver(goalReceiver, new IntentFilter("condi.kr.ac.swu.condiproject.success"));
     }
 
     /*
@@ -200,6 +201,48 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         }
     };
 
+    private BroadcastReceiver goalReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            showRoomDialog();
+        }
+    };
+
+    public void showRoomDialog() {
+
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.custom_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setLayout(850,450);
+
+        TextView dlgDefaultText_big = (TextView) dialog.findViewById(R.id.dlgDefaultText_big);
+        TextView dlgDefaultText_small = (TextView) dialog.findViewById(R.id.dlgDefaultText_small);
+        Button dlgOk = (Button) dialog.findViewById(R.id.dlgOk);
+
+        dlgDefaultText_big.setText("목 표 달 성");
+        dlgDefaultText_small.setText("목표에 도달하셨습니다!");
+        dlgOk.setText("확   인");
+
+        dlgOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                isDialogShow = false;
+            }
+        });
+
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                startActivity(new Intent(getApplicationContext(), GoalActivity.class));
+                finish();
+            }
+        });
+
+        dialog.show();
+        isDialogShow = true;
+    }
 
     public void showRoomDialog(String message, String sendername) {
 
