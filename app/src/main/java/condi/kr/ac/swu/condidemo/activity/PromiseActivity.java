@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -28,6 +29,7 @@ public class PromiseActivity extends BaseActivity {
 
     private ListView promise_list;
     private ImageView btn_add_promise;
+    private RelativeLayout addpromise;
     private TextView promise_tutorial;
 
     private List<Properties> promiseList;
@@ -44,6 +46,7 @@ public class PromiseActivity extends BaseActivity {
     private void initView() {
         btn_add_promise = (ImageView) findViewById(R.id.btn_add_promise);
         promise_tutorial = (TextView) findViewById(R.id.promise_tutorial);
+        addpromise = (RelativeLayout) findViewById(R.id.addpromise);
 
         btn_add_promise.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +97,7 @@ public class PromiseActivity extends BaseActivity {
                                 /*
                                 * set listView
                                 * */
+                                addpromise.setVisibility(View.INVISIBLE);
                                 promise_tutorial.setVisibility(View.INVISIBLE);
                                 View header = getLayoutInflater().inflate(R.layout.promise_list_footer, null, false);
                                 promise_list = (ListView) findViewById(R.id.promise_list);
@@ -110,6 +114,16 @@ public class PromiseActivity extends BaseActivity {
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);
 
+                                    }
+                                });
+
+                                header.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent i = new Intent(getApplicationContext(), AddPromiseActivity.class);
+                                        i.putExtra("mode", 1);
+                                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(i);
                                     }
                                 });
                             }

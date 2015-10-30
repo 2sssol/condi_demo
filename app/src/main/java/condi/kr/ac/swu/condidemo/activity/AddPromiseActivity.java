@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewDebug;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -48,7 +49,7 @@ public class AddPromiseActivity extends AppCompatActivity
     private int mode;
     private final DateFormat FORMATTER = new SimpleDateFormat("yyyy.MM.dd (E)");
 
-    private ImageButton cancelPromise, addPromise;
+    private Button cancelPromise, addPromise;
     private MaterialCalendarView calendarView;
     private TextView newSchDate, newSchTime;
     private TimePicker timePicker;
@@ -83,6 +84,12 @@ public class AddPromiseActivity extends AppCompatActivity
         setCourseNames();
 
         schContentsNew = (EditText) findViewById(R.id.sch_contents_new);
+
+        addPromise = (Button) findViewById(R.id.addPromise);
+        cancelPromise = (Button) findViewById(R.id.cancelPromise);
+
+        addPromise.setOnClickListener(this);
+        cancelPromise.setOnClickListener(this);
     }
 
 
@@ -94,14 +101,7 @@ public class AddPromiseActivity extends AppCompatActivity
         else
             ((TextView)findViewById(R.id.titleText)).setText("약속 수정하기");
 
-        addPromise = (ImageButton) findViewById(R.id.sidemenu);
-        cancelPromise = (ImageButton) findViewById(R.id.icon_home);
 
-        addPromise.setImageResource(R.drawable.icon_promise_ok);
-        cancelPromise.setImageResource(R.drawable.icon_promise_cancel);
-
-        addPromise.setOnClickListener(this);
-        cancelPromise.setOnClickListener(this);
     }
 
     private void setCourseNames() {
@@ -212,7 +212,6 @@ public class AddPromiseActivity extends AppCompatActivity
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        Toast.makeText(getApplicationContext(), courseNames.get(i), Toast.LENGTH_SHORT).show();
         location = courseNames.get(i);
     }
 

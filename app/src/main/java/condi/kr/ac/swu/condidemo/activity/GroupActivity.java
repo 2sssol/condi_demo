@@ -66,7 +66,6 @@ public class GroupActivity extends BaseActivity {
 
     private int friendCount = 0;
     private String otherCurrent1, otherCurrent2,  otherCurrent3;
-    private int k = 0;
     private String dml1, dml2, dml3;
     private Handler h1 = new Handler();
     private Handler h2 = new Handler();
@@ -98,6 +97,7 @@ public class GroupActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group);
         initActionBar("어울림");
+        percent = 0;
         initView();
     }
 
@@ -280,13 +280,7 @@ public class GroupActivity extends BaseActivity {
             public void run() {
                 String result = "";
                 while (percent <= 100) {
-                    if(percent > 100) {
-                        percent = 100;
-                        break;
-                    }
-                    String dml = "select sum(currentwalk) as count " +
-                            "from walk " +
-                            "where groups="+Session.GROUPS;
+                    String dml = "select sum(currentwalk) as count  from walk  where groups="+Session.GROUPS;
                     result = NetworkAction.sendDataToServer("sum.php", dml);
                     if(result.equals("")||result.isEmpty())
                         result = "0";
@@ -299,10 +293,11 @@ public class GroupActivity extends BaseActivity {
                     graphHandler.post(new Runnable() {
                         @Override
                         public void run() {
+                            Log.d("myview",String.format("%s",percent));
                             myView.changePercentage(percent);
                             myView.invalidate();
 
-                            txtPercent.setText(Integer.toString(percent));
+                            txtPercent.setText(String.format("%s",percent));
                             txtCurrentKM.setText(Float.toString(currentKM));
 
                             if(currentKM > courseKm1) {
@@ -601,13 +596,16 @@ public class GroupActivity extends BaseActivity {
         registerReceiver(broadcastReceiver, new IntentFilter("condi.kr.ac.swu.condiproject.step"));
     }
 
+
     @Override
-    protected void onStop() {
-        super.onStop();
+    public void onBackPressed() {
+        super.onBackPressed();
+
         Log.d("groups stop : ", "noStop");
         unregisterReceiver(broadcastReceiver);
-        if(viewThread.isAlive())
-            viewThread.stop();
+        graphHandler = null;
+        /*if(viewThread.isAlive())
+            viewThread.stop();*/
     }
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {

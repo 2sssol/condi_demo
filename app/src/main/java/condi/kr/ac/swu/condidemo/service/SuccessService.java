@@ -20,7 +20,7 @@ public class SuccessService extends Service {
     private String groups = Session.GROUPS;
     private String user = Session.ID;
     private String name = Session.NICKNAME;
-    private String  goalkm;
+    private String goalkm;
     private Thread thread;
     private String dml;
     private String result;
@@ -40,11 +40,12 @@ public class SuccessService extends Service {
                     if(result.equals("")||result.isEmpty())
                         result = "0";
 
-                    String km = String.format("%s", ( Math.round(Integer.parseInt(result) * 0.011559 * 100)/100));
+                    float km = (float)( Math.round(Integer.parseInt(result) * 0.011559 * 100)/100);
+                    float goal = Float.parseFloat(goalkm);
                     Log.i("gaal", goalkm);
-                    Log.i("km", km);
+                    Log.i("km", Float.toString(km));
 
-                    if(km.equals(goalkm)) {
+                    if(km >= goal) {
                         new AsyncTask() {
                             @Override
                             protected Object doInBackground(Object[] params) {
