@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -279,7 +280,7 @@ public class GroupActivity extends BaseActivity {
             @Override
             public void run() {
                 String result = "";
-                while (percent <= 100) {
+                while (percent <= 100 || !viewThread.isInterrupted()) {
                     String dml = "select sum(currentwalk) as count  from walk  where groups="+Session.GROUPS;
                     result = NetworkAction.sendDataToServer("sum.php", dml);
                     if(result.equals("")||result.isEmpty())
@@ -291,7 +292,6 @@ public class GroupActivity extends BaseActivity {
                     graphHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            Log.d("myview",String.format("%s",percent));
                             myView.changePercentage(percent);
                             myView.invalidate();
 
@@ -594,7 +594,6 @@ public class GroupActivity extends BaseActivity {
         registerReceiver(broadcastReceiver, new IntentFilter("condi.kr.ac.swu.condiproject.step"));
     }
 
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -731,6 +730,7 @@ public class GroupActivity extends BaseActivity {
         dialog.show();
         isDialogShow = true;
     }
+
 
 
 }
