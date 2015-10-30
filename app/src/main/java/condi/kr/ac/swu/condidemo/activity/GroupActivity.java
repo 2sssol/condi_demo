@@ -170,7 +170,7 @@ public class GroupActivity extends BaseActivity {
                 else {
                     results = o.toString().split("/");
                     txtTotalDate.setText(results[0]);
-                    txtTotalKM.setText(results[1].substring(0,5));
+                    txtTotalKM.setText(results[1].substring(0,4));
                     totalKM = Float.parseFloat(results[1]);
 
                     printErrorMsg("totalKM : " + totalKM);
