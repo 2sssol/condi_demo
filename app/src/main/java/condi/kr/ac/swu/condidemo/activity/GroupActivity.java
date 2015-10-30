@@ -428,7 +428,7 @@ public class GroupActivity extends BaseActivity {
                                         }
                                     });
 
-                                    dml1 = "select sum(currentwalk) from walk where user = '"+friends.get(0).getProperty("mid")+"'";
+                                    dml1 = "select sum(currentwalk) as count from walk where user = '"+friends.get(0).getProperty("mid")+"'";
 
                                 } else if(friendCount ==1) {
                                     friend2.setVisibility(View.VISIBLE);
@@ -443,7 +443,7 @@ public class GroupActivity extends BaseActivity {
                                             showCockDialog(friends.get(1).getProperty("mid"), friends.get(1).getProperty("mname"));
                                         }
                                     });
-                                    dml2 = "select sum(currentwalk) from walk where user = '"+friends.get(1).getProperty("mid")+"'";
+                                    dml2 = "select sum(currentwalk) as count from walk where user = '"+friends.get(1).getProperty("mid")+"'";
                                 } else {
                                     friend3.setVisibility(View.VISIBLE);
                                     setOtherProfileURL(p4, p.getProperty("mprofile"));
@@ -457,7 +457,7 @@ public class GroupActivity extends BaseActivity {
                                             showCockDialog(friends.get(2).getProperty("mid"), friends.get(2).getProperty("mname"));
                                         }
                                     });
-                                    dml3 = "select sum(currentwalk) from walk where user = '"+friends.get(2).getProperty("mid")+"'";
+                                    dml3 = "select sum(currentwalk) as count from walk where user = '"+friends.get(2).getProperty("mid")+"'";
                                 }
 
                                 friendCount++;
