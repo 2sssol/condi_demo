@@ -51,6 +51,7 @@ public class GroupActivity extends BaseActivity {
     private TextView txtPercent, txtCurrentDate, txtCurrentKM;
 
     private Button btnMap, btnTodolist;
+    private Thread viewThread;
 
     // 경로
     private TextView txtCourseName1, txtCourseName2, txtCourseName3, txtCourseName4;   // 나머지 코스 이름
@@ -274,7 +275,7 @@ public class GroupActivity extends BaseActivity {
     }
 
     private void setMyView() {
-        new Thread(new Runnable() {
+        viewThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 String result = "";
@@ -294,7 +295,6 @@ public class GroupActivity extends BaseActivity {
                     percent = (int)((float) currentKM / totalKM *100);
                     Log.i("currentKM", Float.toString(currentKM));
                     Log.i("percent", Integer.toString(percent));
-
 
                     graphHandler.post(new Runnable() {
                         @Override
@@ -338,7 +338,9 @@ public class GroupActivity extends BaseActivity {
                     }
                 }
             }
-        }).start();
+        });
+
+        viewThread.start();
     }
 
     private void setOther() {
@@ -602,7 +604,10 @@ public class GroupActivity extends BaseActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        Log.d("groups stop : ", "noStop");
         unregisterReceiver(broadcastReceiver);
+        if(viewThread.isAlive())
+            viewThread.stop();
     }
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
