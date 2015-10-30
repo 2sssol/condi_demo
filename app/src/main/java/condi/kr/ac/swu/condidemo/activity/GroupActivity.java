@@ -603,7 +603,7 @@ public class GroupActivity extends BaseActivity {
 
         Log.d("groups stop : ", "noStop");
         unregisterReceiver(broadcastReceiver);
-        graphHandler = null;
+        viewThread.interrupt();
         /*if(viewThread.isAlive())
             viewThread.stop();*/
     }
