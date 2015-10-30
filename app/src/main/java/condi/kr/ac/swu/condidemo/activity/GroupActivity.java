@@ -477,6 +477,7 @@ public class GroupActivity extends BaseActivity {
                                         h1.post(new Runnable() {
                                             @Override
                                             public void run() {
+                                                 Log.d("other's post1", otherCurrent1);
                                                 pcurrent2_step.setText(otherCurrent1);
                                                 pcurrent2_km.setText(String.format("%s", Math.round(Integer.parseInt(otherCurrent1) * 0.011559 * 100) / 100));
                                             }
@@ -503,6 +504,7 @@ public class GroupActivity extends BaseActivity {
                                         h2.post(new Runnable() {
                                             @Override
                                             public void run() {
+                                                Log.d("other's post2", otherCurrent2);
                                                 pcurrent3_step.setText(otherCurrent2);
                                                 pcurrent3_km.setText(String.format("%s", Math.round(Integer.parseInt(otherCurrent2) * 0.011559 * 100) / 100));
                                             }
@@ -529,6 +531,7 @@ public class GroupActivity extends BaseActivity {
                                         h3.post(new Runnable() {
                                             @Override
                                             public void run() {
+                                                Log.d("other's post3", otherCurrent3);
                                                 pcurrent4_step.setText(otherCurrent3);
                                                 pcurrent4_km.setText(String.format("%s", Math.round(Integer.parseInt(otherCurrent3) * 0.011559 * 100) / 100));
                                             }
