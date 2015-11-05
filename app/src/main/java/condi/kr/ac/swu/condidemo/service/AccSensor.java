@@ -7,6 +7,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.IBinder;
+import android.util.Log;
 
 import condi.kr.ac.swu.condidemo.data.NetworkAction;
 import condi.kr.ac.swu.condidemo.data.Session;

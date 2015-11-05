@@ -174,8 +174,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
         registerReceiver(sensorReceiver, new IntentFilter("condi.kr.ac.swu.condiproject.step"));
     }
 
