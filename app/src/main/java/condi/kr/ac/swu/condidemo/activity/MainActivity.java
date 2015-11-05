@@ -57,9 +57,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initActionBar("어울림");
-
-        printErrorMsg("Main onCreate");
-
         initView();
         initVideo();
 
@@ -179,7 +176,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onStart() {
         super.onStart();
-        printErrorMsg("Main onStart");
         registerReceiver(sensorReceiver, new IntentFilter("condi.kr.ac.swu.condiproject.step"));
     }
 
@@ -193,6 +189,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         @Override
         public void onReceive(Context context, Intent intent) {
+            printErrorMsg("sensorReceiver received");
+
             walk = Integer.parseInt(intent.getStringExtra("walk"));
             km = (float) ( Math.round(walk * 0.011559 * 100)/100);
 
