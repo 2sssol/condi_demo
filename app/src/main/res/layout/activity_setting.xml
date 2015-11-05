@@ -43,22 +43,39 @@
                     android:textSize="18sp" />
 
 
-                <condi.kr.ac.swu.condidemo.view.CircularNetworkImageView
-                    android:id="@+id/settingProfile"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_below="@+id/setting_top1"
+                <RelativeLayout
+                    android:id="@+id/profile_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/setting_top1"
                     android:layout_centerHorizontal="true"
-                    android:focusable="false"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/thumb_story" />
+                    android:focusable="false">
+
+                    <ImageView
+                        android:id="@+id/settingProfile_default"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:focusable="false"
+                        android:scaleType="centerCrop"
+                        android:visibility="invisible"/>
+
+                    <condi.kr.ac.swu.condidemo.view.CircularNetworkImageView
+                        android:id="@+id/settingProfile"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:focusable="false"
+                        android:scaleType="centerCrop"
+                        android:visibility="visible"/>
+
+                </RelativeLayout>
+
 
                 <ImageButton
                     android:id="@+id/btnSettingPic"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_alignBottom="@id/settingProfile"
-                    android:layout_alignRight="@id/settingProfile"
+                    android:layout_alignBottom="@id/profile_parent"
+                    android:layout_alignRight="@id/profile_parent"
                     android:background="@android:color/transparent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/icon_camera" />
@@ -68,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@+id/txt_setting_top1"
-                    android:layout_below="@+id/settingProfile"
+                    android:layout_below="@+id/profile_parent"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
@@ -141,7 +158,7 @@
                     android:id="@+id/txt_setting_top2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/setting_top2"
+                    android:layout_alignBottom="@id/setting_top2"
                     android:layout_alignParentStart="true"
                     android:layout_marginBottom="2dp"
                     android:layout_marginStart="16dp"
@@ -155,7 +172,7 @@
                     android:hint="새로운 비밀번호 입력"
                     android:background="@drawable/password_bg"
                     android:gravity="center"
-                    android:layout_below="@+id/setting_top2"
+                    android:layout_below="@id/setting_top2"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/settingPassword1"
                     android:layout_marginTop="20dp"/>
@@ -166,7 +183,7 @@
                     android:hint="한 번 더 입력"
                     android:background="@drawable/password_bg"
                     android:gravity="center"
-                    android:layout_below="@+id/settingPassword1"
+                    android:layout_below="@id/settingPassword1"
                     android:layout_centerHorizontal="true"
                     android:id="@+id/settingPassword2"
                     android:layout_marginTop="15dp"/>
@@ -180,7 +197,7 @@
                     android:layout_width="100dp"
                     android:layout_height="30dp"
                     android:background="@drawable/button_mint"
-                    android:layout_below="@+id/settingPassword2"
+                    android:layout_below="@id/settingPassword2"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"/>
 
@@ -303,15 +320,16 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-            <Button
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:id="@+id/settingBtnLogout"
-                android:text="로그아웃"
-                android:gravity="center"
-                android:textColor="#fff"
-                android:background="@drawable/button_mint"
-                android:layout_marginStart="50dp"/>
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/settingBtnLogout"
+                    android:text="로그아웃"
+                    android:gravity="center"
+                    android:textColor="#fff"
+                    android:background="@drawable/button_mint"
+                    android:layout_marginStart="50dp"/>
 
                 <Button
                     android:layout_width="100dp"
