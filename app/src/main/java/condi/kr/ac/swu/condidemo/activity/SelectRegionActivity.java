@@ -43,7 +43,11 @@ public class SelectRegionActivity extends RootActivity {
         txtRegionName2 = (TextView) findViewById(R.id.txtRegionName2);
         txtRegionName3 = (TextView) findViewById(R.id.txtRegionName3);
 
-        setMapURL("map1.png");
+        if(isFirst())
+            setMapURL("map1.png");
+        else {
+            setMapURL("map2.png");
+        }
         setRegionName();
 
         btnSelectCourse.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +59,10 @@ public class SelectRegionActivity extends RootActivity {
             }
         });
 
+    }
+
+    private boolean isFirst() {
+        return getIntent().getBooleanExtra("first", true);
     }
 
     public void setMapURL(final String mapImageURL) {

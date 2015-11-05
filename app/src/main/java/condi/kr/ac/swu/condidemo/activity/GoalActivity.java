@@ -18,6 +18,7 @@ import condi.kr.ac.swu.condidemo.data.GlobalApplication;
 public class GoalActivity extends BaseActivity {
 
     private NetworkImageView imgMap;
+    private Button startNext;
     private final String SERVER_ADDRESS = "http://condi.swu.ac.kr:80/condi2/picture/";
 
     @Override
@@ -30,6 +31,7 @@ public class GoalActivity extends BaseActivity {
 
     private void initView(){
         imgMap = (NetworkImageView) findViewById(R.id.imgMapNext);
+        startNext = (Button) findViewById(R.id.startNext);
         setMapURL("map2.png");
     }
 
@@ -42,4 +44,12 @@ public class GoalActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        if(v == startNext) {
+            startActivity(new Intent(getApplicationContext(), StartNewActivity.class));
+            finish();
+        }
+
+    }
 }

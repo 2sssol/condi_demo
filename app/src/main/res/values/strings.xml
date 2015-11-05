@@ -31,4 +31,5 @@
     <string name="title_activity_loading">LoadingActivity</string>
     <string name="title_activity_intro_tutorial">IntroTutorialActivity</string>
     <string name="title_activity_goal">GoalActivity</string>
+    <string name="title_activity_start_new">StartNewActivity</string>
 </resources>

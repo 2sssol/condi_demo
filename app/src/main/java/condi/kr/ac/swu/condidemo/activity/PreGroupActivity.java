@@ -343,7 +343,9 @@ public class PreGroupActivity extends RootActivity {
     }
 
     private void redirectSelectRegionActivity() {
-        startActivity(new Intent(getApplicationContext(), SelectRegionActivity.class));
+        Intent intent = new Intent(getApplicationContext(), SelectRegionActivity.class);
+        intent.putExtra("first", true);
+        startActivity(intent);
         finish();
     }
 

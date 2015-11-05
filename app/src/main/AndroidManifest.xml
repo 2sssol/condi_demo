@@ -194,6 +194,11 @@
             android:enabled="true"
             android:exported="true" >
         </service>
+
+        <activity
+            android:name=".activity.StartNewActivity"
+            android:label="@string/title_activity_start_new" >
+        </activity>
     </application>
 
 </manifest>

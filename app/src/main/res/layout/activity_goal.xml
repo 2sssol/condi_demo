@@ -120,6 +120,7 @@
 
     <!-- 코스선택으로 이동-->
     <Button
+        android:id="@+id/startNext"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:text="다음 여정 시작"
