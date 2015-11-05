@@ -595,14 +595,11 @@ public class GroupActivity extends BaseActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
-        Log.d("groups stop : ", "noStop");
+    protected void onPause() {
+        super.onPause();
+        Log.d("groups onResume : ", "onResume");
         unregisterReceiver(broadcastReceiver);
         viewThread.interrupt();
-        /*if(viewThread.isAlive())
-            viewThread.stop();*/
     }
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {

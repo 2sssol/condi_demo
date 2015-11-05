@@ -42,7 +42,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     private List<Properties> lists;
     private ListView lv;
     private MsgListAdapter adapter;
-    private SlidingMenu slidingMenu;
+    protected SlidingMenu slidingMenu;
 
     private TextView btnGoSetting, see_more_msg;
     private Button btn_about_courses_list;
@@ -301,4 +301,14 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         }.execute();
     }
 
+    @Override
+    public void onBackPressed() {
+
+        if(slidingMenu.isMenuShowing()) {
+            slidingMenu.toggle();
+            return;
+        }
+
+        super.onBackPressed();
+    }
 }

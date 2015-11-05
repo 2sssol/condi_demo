@@ -229,6 +229,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
+        if(slidingMenu.isMenuShowing()) {
+            slidingMenu.toggle();
+            return;
+        }
+
         backPressCloseHandler.onBackPressed();
     }
 
