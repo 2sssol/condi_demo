@@ -110,7 +110,7 @@ public class PromiseActivity extends BaseActivity {
                                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                         printErrorMsg("i => " + i);
                                         Intent intent = new Intent(getApplicationContext(), PromiseDetailActivity.class);
-                                        intent.putExtra("pid", promiseList.get(i - 1).getProperty("id"));
+                                        intent.putExtra("pid", promiseList.get(i).getProperty("id"));
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);
 

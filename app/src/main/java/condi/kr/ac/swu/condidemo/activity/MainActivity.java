@@ -189,8 +189,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            printErrorMsg("sensorReceiver received");
-
             walk = Integer.parseInt(intent.getStringExtra("walk"));
             km = (float) ( Math.round(walk * 0.011559 * 100)/100);
 

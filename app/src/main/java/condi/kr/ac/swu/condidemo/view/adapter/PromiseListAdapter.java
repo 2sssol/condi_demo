@@ -79,7 +79,7 @@ public class PromiseListAdapter extends BaseAdapter {
         Date date;
         String[] dates = new String[2];
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy.MM.dd (E)");
-        SimpleDateFormat format2 = new SimpleDateFormat("a HH시 mm분");
+        SimpleDateFormat format2 = new SimpleDateFormat("a hh시 mm분");
         try {
             date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(data.get(position).get("pdate"));
             dates[0] = format1.format(date);

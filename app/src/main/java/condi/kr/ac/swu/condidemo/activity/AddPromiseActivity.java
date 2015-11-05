@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,6 +32,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,6 +49,7 @@ public class AddPromiseActivity extends AppCompatActivity
                     TimePicker.OnTimeChangedListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     private int mode;
+    private String pid;
     private final DateFormat FORMATTER = new SimpleDateFormat("yyyy.MM.dd (E)");
 
     private Button cancelPromise, addPromise;
@@ -81,7 +84,6 @@ public class AddPromiseActivity extends AppCompatActivity
         calendarView.setOnMonthChangedListener(this);
 
         spinner = (Spinner) findViewById(R.id.spinner_location);
-        setCourseNames();
 
         schContentsNew = (EditText) findViewById(R.id.sch_contents_new);
 
@@ -90,8 +92,9 @@ public class AddPromiseActivity extends AppCompatActivity
 
         addPromise.setOnClickListener(this);
         cancelPromise.setOnClickListener(this);
-    }
 
+        setInfo();
+    }
 
     protected void initActionBar() {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -102,6 +105,96 @@ public class AddPromiseActivity extends AppCompatActivity
             ((TextView)findViewById(R.id.titleText)).setText("약속 수정하기");
 
 
+    }
+
+    private void setInfo() {
+        if(mode == 0 /* modify */) {
+            pid = getIntent().getStringExtra("pid");
+            new AsyncTask() {
+                @Override
+                protected Object doInBackground(Object[] params) {
+                    String dml = "select * from promise where id="+pid;
+                    return NetworkAction.sendDataToServer("promise.php", dml);
+                }
+
+                @Override
+                protected void onPostExecute(Object o) {
+                    super.onPostExecute(o);
+
+                    new AsyncTask() {
+                        List<Properties> promise;
+                        @Override
+                        protected Object doInBackground(Object[] params) {
+                            try {
+                                promise = NetworkAction.parse("promise.xml", "promise");
+                            } catch (XmlPullParserException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+
+                        @Override
+                        protected void onPostExecute(Object o) {
+                            super.onPostExecute(o);
+                            try {
+                                Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(promise.get(0).getProperty("pdate"));
+                                calendarView.setCurrentDate(date);
+                                calendarView.setDateSelected(date, true);
+                                newSchDate.setText(getSelectedDatesString());
+
+                                timePicker.setCurrentHour(date.getHours());
+                                timePicker.setCurrentHour(date.getMinutes());
+
+                                promise_date = new SimpleDateFormat("yyMMdd").format(date.getDate()).toString();
+                                promise_time =  new SimpleDateFormat("HHmm").format(date.getTime()).toString();
+
+                                Log.d("AddPromiseActivity", promise_date+promise_time);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            location = promise.get(0).getProperty("location");
+                            content = promise.get(0).getProperty("content");
+                            schContentsNew.setText(content);
+
+                            setCourseNames();
+                        }
+                    }.execute();
+                }
+            }.execute();
+            //calendarView.setCurrentDate();
+        } else {
+            calendarView.setCurrentDate(new Date());
+            calendarView.setDateSelected(new Date(), true);
+            newSchDate.setText(getSelectedDatesString());
+
+            String ampm = "";
+            String hour = "";
+            String min = "";
+
+            if(new Date().getHours()>12)
+                ampm = "오후";
+            else
+                ampm = "오전";
+
+            if(new Date().getHours() < 10)
+                hour = String.format("0%s",new Date().getHours());
+            else
+                hour = Integer.toString(new Date().getHours());
+
+            if(new Date().getMinutes() < 10)
+                min = String.format("0%s",new Date().getMinutes());
+            else
+                min = Integer.toString(new Date().getMinutes());
+
+            newSchTime.setText(String.format("%s %s시 %s분", ampm, hour, min));
+
+            promise_date = new SimpleDateFormat("yyMMdd").format(new Date()).toString();
+            promise_time =  new SimpleDateFormat("HHmm").format(new Date()).toString();
+            setCourseNames();
+        }
     }
 
     private void setCourseNames() {
@@ -149,6 +242,8 @@ public class AddPromiseActivity extends AppCompatActivity
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddPromiseActivity.this, R.layout.spinner_list, R.id.spinner_text, courseNames);
                             spinner.setAdapter(adapter);
                             spinner.setOnItemSelectedListener(AddPromiseActivity.this);
+
+
                         }
                     }.execute();
                 } else {
@@ -169,7 +264,7 @@ public class AddPromiseActivity extends AppCompatActivity
     private void setTotal() {
         CalendarDay date = calendarView.getSelectedDate();
         promise_date = new SimpleDateFormat("yyMMdd").format(date.getDate()).toString();
-        total = promise_date+promise_time; /* format : '%y%m%d%I%i' */
+        total = promise_date + promise_time; /* format : '%y%m%d%I%i' */
     }
 
     /*
@@ -217,7 +312,8 @@ public class AddPromiseActivity extends AppCompatActivity
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
+        if(location == null)
+            adapterView.setSelection(courseNames.indexOf(location));
     }
 
     @Override
@@ -230,10 +326,10 @@ public class AddPromiseActivity extends AppCompatActivity
                 @Override
                 protected Object doInBackground(Object[] objects) {
                     String dml = "";
-                    if(mode == 1 /* new */)
-                        dml = "insert into promise(pdate, location, content, writer, groups) values( str_to_date("+total+",'%y%m%d%I%i'), '"+location+"', '"+content+"', '"+Session.ID+"', "+Session.GROUPS+")";
+                    if(mode == 1 /* new */) /*insert into promise(pdate) values(str_to_date('1511051111', '%y%m%d%I%i'))*/
+                        dml = "insert into promise(pdate, location, content, writer, groups) values( str_to_date('"+total+"','%y%m%d%H%i'), '"+location+"', '"+content+"', '"+Session.ID+"', "+Session.GROUPS+")";
                     else if(mode == 0 /* modify */)
-                        dml = "update promise set pdate=str_to_date("+total+",'%y%m%d%I%i'), location='"+location+"', content='"+content+"' where writer='"+Session.ID+"' and groups="+Session.GROUPS;
+                        dml = "update promise set pdate=str_to_date('"+total+"','%y%m%d%H%i'), location='"+location+"', content='"+content+"' where id="+pid;
 
                     System.out.println("dml : "+dml);
                     return NetworkAction.sendDataToServer(dml);

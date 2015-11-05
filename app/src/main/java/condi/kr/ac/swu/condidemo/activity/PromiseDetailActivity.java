@@ -26,7 +26,7 @@ import condi.kr.ac.swu.condidemo.data.NetworkAction;
 
 public class PromiseDetailActivity extends BaseActivity implements View.OnClickListener{
 
-    private int pid;
+    private String pid;
     private Button btn_delete_promise, btn_edit_promise;
     private TextView txt_sch_detail_date, txt_sch_detail_time, txt_sch_detail_location, txt_shc_detail_contents;
 
@@ -35,8 +35,7 @@ public class PromiseDetailActivity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promise_detail);
         initActionBar("약속보기");
-
-        System.out.println("pid : " + (pid = Integer.parseInt(getIntent().getStringExtra("pid"))));
+        pid = getIntent().getStringExtra("pid");
         initView();
     }
 
@@ -141,6 +140,7 @@ public class PromiseDetailActivity extends BaseActivity implements View.OnClickL
         } else if(v == btn_edit_promise) {
             Intent intent = new Intent(getApplicationContext(), AddPromiseActivity.class);
             intent.putExtra("mode", 0);
+            intent.putExtra("pid",pid);
             startActivity(intent);
             finish();
         }
