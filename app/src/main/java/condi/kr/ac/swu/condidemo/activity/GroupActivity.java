@@ -607,7 +607,8 @@ public class GroupActivity extends BaseActivity {
     protected void onPause() {
         super.onPause();
         Log.d("groups onResume : ", "onResume");
-        unregisterReceiver(broadcastReceiver);
+        if(broadcastReceiver.isOrderedBroadcast())
+            unregisterReceiver(broadcastReceiver);
         viewThread.interrupt();
     }
 
