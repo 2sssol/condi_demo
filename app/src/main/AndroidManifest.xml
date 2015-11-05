@@ -199,6 +199,10 @@
             android:name=".activity.StartNewActivity"
             android:label="@string/title_activity_start_new" >
         </activity>
+        <activity
+            android:name=".activity.MapActivity"
+            android:label="@string/title_activity_map" >
+        </activity>
     </application>
 
 </manifest>

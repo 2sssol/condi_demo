@@ -32,4 +32,5 @@
     <string name="title_activity_intro_tutorial">IntroTutorialActivity</string>
     <string name="title_activity_goal">GoalActivity</string>
     <string name="title_activity_start_new">StartNewActivity</string>
+    <string name="title_activity_map">MapActivity</string>
 </resources>

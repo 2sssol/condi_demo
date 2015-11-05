@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff8ed">
+
+    <ScrollView
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/imgMap_map"
+                android:scaleType="fitCenter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:layout_centerHorizontal="true"/>
+
+
+            <RelativeLayout
+                android:layout_marginTop="150dp"
+                android:layout_marginStart="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/txtRegionInfo1"
+                    android:text="이번 여정은"
+                    android:textSize="36sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/txtRegionName_map1"
+                    android:text="중구"
+                    android:textSize="40sp"
+                    android:textColor="#00c6c1"
+                    android:layout_below="@id/txtRegionInfo1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+                <TextView
+                    android:text="입니다."
+                    android:textSize="36sp"
+                    android:layout_below="@id/txtRegionInfo1"
+                    android:layout_toRightOf="@id/txtRegionName_map1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="650dp"
+                android:layout_marginStart="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/txtRegionInfo2"
+                    android:text="이번 여정은"
+                    android:textSize="36sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/txtRegionName_map2"
+                    android:text="중구"
+                    android:textSize="40sp"
+                    android:textColor="#00c6c1"
+                    android:layout_below="@id/txtRegionInfo2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+                <TextView
+                    android:text="입니다."
+                    android:textSize="36sp"
+                    android:layout_below="@id/txtRegionInfo2"
+                    android:layout_toRightOf="@id/txtRegionName_map2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="1150dp"
+                android:layout_marginStart="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/txtRegionInfo3"
+                    android:text="이번 여정은"
+                    android:textSize="36sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/txtRegionName_map3"
+                    android:text="중구"
+                    android:textSize="40sp"
+                    android:textColor="#00c6c1"
+                    android:layout_below="@id/txtRegionInfo3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+                <TextView
+                    android:text="입니다."
+                    android:textSize="36sp"
+                    android:layout_below="@id/txtRegionInfo3"
+                    android:layout_toRightOf="@id/txtRegionName_map3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
