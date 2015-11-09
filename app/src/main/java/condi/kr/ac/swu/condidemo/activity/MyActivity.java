@@ -4,39 +4,21 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
-import android.graphics.PointF;
-import android.graphics.RectF;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-import java.util.TimeZone;
 
 import condi.kr.ac.swu.condidemo.R;
 import condi.kr.ac.swu.condidemo.data.NetworkAction;
 import condi.kr.ac.swu.condidemo.data.Session;
-import condi.kr.ac.swu.condidemo.view.CustomCircularRingView;
 import condi.kr.ac.swu.condidemo.view.CustomCircularRingView2;
 import condi.kr.ac.swu.condidemo.view.PatchPointView;
 
@@ -55,13 +37,9 @@ public class MyActivity extends BaseActivity {
     private int period = 0;
     private float totalKM;
 
-    private Thread viewThread;
-
     // thread
     private Handler graphHandler = new Handler();
-    private Thread th;
     int percent = 0;
-    int currentStep = 0;
     float currentKM = 0.00f;
 
 
@@ -96,7 +74,6 @@ public class MyActivity extends BaseActivity {
         txtCourseName4 = (TextView) findViewById(R.id.txtCourseName42);
 
         setMy();
-        setMyView();
     }
 
     private void setDateKM () {
@@ -214,74 +191,12 @@ public class MyActivity extends BaseActivity {
 
     }
 
-    private void setMyView() {
-        viewThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String result = "";
-                while (percent <= 100 || !viewThread.isInterrupted()) {
-                    String dml = "select sum(currentwalk) as count  from walk  where groups="+Session.GROUPS;
-                    result = NetworkAction.sendDataToServer("sum.php", dml);
-                    if(result.equals("")||result.isEmpty())
-                        result = "0";
-                    currentStep = Integer.parseInt(result);
-                    currentKM = (float) (currentStep * 0.011559);//Math.round(currentStep * 0.011559 * 100)/100;
-                    percent = Math.round((currentKM / totalKM) * 100);
-
-                    graphHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            myView.changePercentage(percent);
-                            myView.invalidate();
-
-                            txtPercent.setText(String.format("%s",percent));
-                            txtCurrentKM.setText(String.format("%.2f", currentKM));
-
-                            if(currentKM > courseKm1) {
-                                if(currentKM > courseKm1+courseKm2) {
-                                    if(currentKM > courseKm1+courseKm2+courseKm3) {
-                                        if(currentKM > courseKm1+courseKm2+courseKm3+courseKm4) {
-                                            percent = 100;
-                                        } else {
-                                            txtCourseName1.setBackgroundResource(R.drawable.route_blank_filled);
-                                            txtCourseName2.setBackgroundResource(R.drawable.route_blank_filled);
-                                            txtCourseName3.setBackgroundResource(R.drawable.route_blank_filled);
-                                            txtCourseName4.setBackgroundResource(R.drawable.route_blank_filled);
-                                        }
-                                    } else {
-                                        txtCourseName1.setBackgroundResource(R.drawable.route_blank_filled);
-                                        txtCourseName2.setBackgroundResource(R.drawable.route_blank_filled);
-                                        txtCourseName3.setBackgroundResource(R.drawable.route_blank_filled);
-                                    }
-                                } else {
-                                    txtCourseName1.setBackgroundResource(R.drawable.route_blank_filled);
-                                    txtCourseName2.setBackgroundResource(R.drawable.route_blank_filled);
-                                }
-                            } else {
-                                txtCourseName1.setBackgroundResource(R.drawable.route_blank_filled);
-                            }
-                        }
-                    });
-
-                    try {
-                        Thread.sleep(30);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
-        viewThread.start();
-    }
-
 
     @Override
     protected void onPause() {
         super.onPause();
         if(broadcastReceiver.isOrderedBroadcast())
             unregisterReceiver(broadcastReceiver);
-        viewThread.interrupt();
     }
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -290,64 +205,49 @@ public class MyActivity extends BaseActivity {
         public void onReceive(Context context, Intent intent) {
             walk = Integer.parseInt(intent.getStringExtra("walk"));
             txtCurrentKM.setText(String.format("%s", ( Math.round(walk * 0.011559 * 100)/100)));
-            myStep.setText(String.format("%s",walk));
+            myStep.setText(String.format("%s", walk));
 
-            viewThread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    String result = "";
-                    while (percent <= 100 || !viewThread.isInterrupted()) {
+            currentKM = (float) (walk * 0.011559);//Math.round(currentStep * 0.011559 * 100)/100;
+            percent = Math.round((currentKM / totalKM) * 100);
 
-                        currentKM = (float) (walk * 0.011559);//Math.round(currentStep * 0.011559 * 100)/100;
-                        percent = Math.round((currentKM / totalKM) * 100);
+            if(percent<=100) {
+                graphHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        myView.changePercentage(percent);
+                        myView.invalidate();
 
-                        graphHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                myView.changePercentage(percent);
-                                myView.invalidate();
+                        txtPercent.setText(String.format("%s", percent));
+                        txtCurrentKM.setText(String.format("%.2f", currentKM));
 
-                                txtPercent.setText(String.format("%s",percent));
-                                txtCurrentKM.setText(String.format("%.2f", currentKM));
-
-                                if(currentKM > courseKm1) {
-                                    if(currentKM > courseKm1+courseKm2) {
-                                        if(currentKM > courseKm1+courseKm2+courseKm3) {
-                                            if(currentKM > courseKm1+courseKm2+courseKm3+courseKm4) {
-                                                percent = 100;
-                                            } else {
-                                                txtCourseName1.setBackgroundResource(R.drawable.road_nametag_on);
-                                                txtCourseName2.setBackgroundResource(R.drawable.road_nametag_on);
-                                                txtCourseName3.setBackgroundResource(R.drawable.road_nametag_on);
-                                                txtCourseName4.setBackgroundResource(R.drawable.road_nametag_on);
-                                            }
-                                        } else {
-                                            txtCourseName1.setBackgroundResource(R.drawable.road_nametag_on);
-                                            txtCourseName2.setBackgroundResource(R.drawable.road_nametag_on);
-                                            txtCourseName3.setBackgroundResource(R.drawable.road_nametag_on);
-                                        }
+                        if (currentKM > courseKm1) {
+                            if (currentKM > courseKm1 + courseKm2) {
+                                if (currentKM > courseKm1 + courseKm2 + courseKm3) {
+                                    if (currentKM > courseKm1 + courseKm2 + courseKm3 + courseKm4) {
+                                        percent = 100;
                                     } else {
                                         txtCourseName1.setBackgroundResource(R.drawable.road_nametag_on);
                                         txtCourseName2.setBackgroundResource(R.drawable.road_nametag_on);
+                                        txtCourseName3.setBackgroundResource(R.drawable.road_nametag_on);
+                                        txtCourseName4.setBackgroundResource(R.drawable.road_nametag_on);
                                     }
                                 } else {
                                     txtCourseName1.setBackgroundResource(R.drawable.road_nametag_on);
-                                } // if-else
-
+                                    txtCourseName2.setBackgroundResource(R.drawable.road_nametag_on);
+                                    txtCourseName3.setBackgroundResource(R.drawable.road_nametag_on);
+                                }
+                            } else {
+                                txtCourseName1.setBackgroundResource(R.drawable.road_nametag_on);
+                                txtCourseName2.setBackgroundResource(R.drawable.road_nametag_on);
                             }
-                        }); // handler-post
+                        } else {
+                            txtCourseName1.setBackgroundResource(R.drawable.road_nametag_on);
+                        } // if-else
 
-                        try {
-                            Thread.sleep(30);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        } // try-catch
+                    }
+                }); // handler-post
+            } // if
 
-                    } // while
-                } // run
-            }); // Thread
-
-            viewThread.start();
         } //onReceive
     }; //broadcastReceiver
 
