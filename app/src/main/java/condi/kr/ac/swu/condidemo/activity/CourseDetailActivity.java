@@ -2,6 +2,7 @@ package condi.kr.ac.swu.condidemo.activity;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -38,6 +39,7 @@ public class CourseDetailActivity extends BaseActivity {
     private int MAX_PAGE=6;
     private Fragment cur_fragment=new Fragment();
     private ViewPager viewPager;
+    private int position = 0;
 
     private String id;
     private String[] cids;
@@ -45,30 +47,32 @@ public class CourseDetailActivity extends BaseActivity {
     private NetworkImageView imgCourseDetail;
     private ImageView icon_info_each_photo1, icon_info_each_photo2, icon_info_each_photo3, icon_info_each_photo4, icon_info_each_photo5, icon_info_each_photo6;
 
-    private ImageButton btnBreforeCourseDetail, btnAfterCourseDetail;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_detail);
         initActionBar("코스 정보");
 
-        viewPager = (ViewPager)findViewById(R.id.viewPager);
-        viewPager.setAdapter(new adapter(getSupportFragmentManager()));
-
         id = getIntent().getStringExtra("id");
         cids = getIntent().getStringArrayExtra("cids");
         for (String s : cids)
             printErrorMsg("cids: "+s);
 
-        int position = 0;
         for(int i =0; i < cids.length; i++) {
             if (id.equals(cids[i]))
                 position = i;
         }
-        printErrorMsg("position : " + position + " / viewPager.getCurrentItem() : "+ viewPager.getCurrentItem());
-        viewPager.setCurrentItem(position);
-        //viewPager.setCurrentItem(R.layout.course_detail);
+
+        viewPager = (ViewPager)findViewById(R.id.viewPager);
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                viewPager.setCurrentItem(position);
+            }
+        });
+
+        viewPager.setAdapter(new adapter(getSupportFragmentManager()));
+
 
     }
 
@@ -93,6 +97,7 @@ public class CourseDetailActivity extends BaseActivity {
                 @Nullable
                 @Override
                 public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
                     LinearLayout linearLayout=(LinearLayout)inflater.inflate(R.layout.course_detail, container, false);
                     initView(linearLayout, cids[position], position);
 
@@ -107,9 +112,10 @@ public class CourseDetailActivity extends BaseActivity {
         public int getCount() {
             return MAX_PAGE;
         }
+
     }
 
-    private void initView(LinearLayout linearLayout, String cid, int index) {
+    public void initView(LinearLayout linearLayout, String cid, int index) {
         info_each_name = (TextView) linearLayout.findViewById(R.id.info_each_name);
         info_each_km = (TextView) linearLayout.findViewById(R.id.info_each_km);
         txtCourseInfoDetail1 = (TextView) linearLayout.findViewById(R.id.txtCourseInfoDetail1);
@@ -122,12 +128,6 @@ public class CourseDetailActivity extends BaseActivity {
         icon_info_each_photo4 = (ImageView) linearLayout.findViewById(R.id.icon_info_each_photo4);
         icon_info_each_photo5 = (ImageView) linearLayout.findViewById(R.id.icon_info_each_photo5);
         icon_info_each_photo6 = (ImageView) linearLayout.findViewById(R.id.icon_info_each_photo6);
-
-        btnBreforeCourseDetail = (ImageButton) linearLayout.findViewById(R.id.btnBreforeCourseDetail);
-        btnAfterCourseDetail = (ImageButton) linearLayout.findViewById(R.id.btnAfterCourseDetail);
-
-        btnBreforeCourseDetail.setOnClickListener(this);
-        btnAfterCourseDetail.setOnClickListener(this);
 
         switch (index) {
             case 0:
@@ -259,21 +259,4 @@ public class CourseDetailActivity extends BaseActivity {
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        super.onClick(v);
-
-        if(v==btnBreforeCourseDetail) {
-            if(viewPager.getCurrentItem()==0)
-                viewPager.setCurrentItem(MAX_PAGE-1);
-            else
-                viewPager.setCurrentItem(viewPager.getCurrentItem()-1);
-
-        } else if(v==btnAfterCourseDetail) {
-            if(viewPager.getCurrentItem()==MAX_PAGE-1)
-                viewPager.setCurrentItem(0);
-            else
-                viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
-        }
-    }
 }

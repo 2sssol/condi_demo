@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -37,17 +38,44 @@ import condi.kr.ac.swu.condidemo.data.Session;
 *          초대 체크
 *
 * */
-public class LoadingActivity extends Activity implements View.OnClickListener {
+public class LoadingActivity extends Activity {
 
     private BackPressCloseHandler backPressCloseHandler;
+    private ProgressBar progressBar;
+    private Handler handler = new Handler();
+    private int percent = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
         backPressCloseHandler = new BackPressCloseHandler(this);
-        new MyPHP().execute();
+        progressBar = (ProgressBar) findViewById(R.id.progLoading);
+        progressBar.setMax(100);
 
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (percent <= 100) {
+                    percent+=10;
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressBar.setProgress(percent);
+                        }
+                    });
+
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+
+        new MyPHP().execute();
     }
 
     private void branchPage() {
@@ -115,20 +143,11 @@ public class LoadingActivity extends Activity implements View.OnClickListener {
 
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
     /*
     * 나의 최신 정보 로드
     * */
     private class MyPHP extends AsyncTask<Void, Void, String> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
 
-        }
 
         @Override
         protected String doInBackground(Void... params) {

@@ -93,6 +93,8 @@ public class GroupActivity extends BaseActivity {
     private boolean isDialogShow = false;
     private boolean isOK;
 
+    private Thread th1, th2, th3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -470,8 +472,6 @@ public class GroupActivity extends BaseActivity {
                                 friendCount++;
                             }
 
-                            Thread th1, th2, th3;
-
                             th1 = new Thread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -610,6 +610,9 @@ public class GroupActivity extends BaseActivity {
         if(broadcastReceiver.isOrderedBroadcast())
             unregisterReceiver(broadcastReceiver);
         viewThread.interrupt();
+        th1.interrupt();
+        th2.interrupt();
+        th3.interrupt();
     }
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {

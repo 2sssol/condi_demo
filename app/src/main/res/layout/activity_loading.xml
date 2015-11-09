@@ -27,6 +27,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="24dp"
 			android:paddingBottom="2dp"
+			android:max="100"
 			/>
 
 	</FrameLayout>
