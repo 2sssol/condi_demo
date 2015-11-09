@@ -53,7 +53,7 @@ public class CourseDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_course_detail);
         initActionBar("코스 정보");
 
-        viewPager=(ViewPager)findViewById(R.id.viewPager);
+        viewPager = (ViewPager)findViewById(R.id.viewPager);
         viewPager.setAdapter(new adapter(getSupportFragmentManager()));
 
         id = getIntent().getStringExtra("id");
@@ -66,8 +66,9 @@ public class CourseDetailActivity extends BaseActivity {
             if (id.equals(cids[i]))
                 position = i;
         }
-        printErrorMsg("position" + position);
-        viewPager.setCurrentItem(R.layout.course_detail);
+        printErrorMsg("position : " + position + " / viewPager.getCurrentItem() : "+ viewPager.getCurrentItem());
+        viewPager.setCurrentItem(position);
+        //viewPager.setCurrentItem(R.layout.course_detail);
 
     }
 

@@ -86,7 +86,7 @@ public class MyActivity extends BaseActivity {
 
         mytxt1.setText(Session.NICKNAME+"님, 여정을 방금시작하셨군요!");
         detailDate1.setText(new SimpleDateFormat("dd").format(new Date()));
-        detailDate1.setText(new SimpleDateFormat("E").format(new Date()));
+        detailDate2.setText(new SimpleDateFormat("E").format(new Date()));
     }
 
     private void setDateKM () {
