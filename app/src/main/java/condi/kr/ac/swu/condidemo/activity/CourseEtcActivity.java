@@ -30,6 +30,7 @@ public class CourseEtcActivity extends BaseActivity {
     private NetworkImageView[] etc_course = new NetworkImageView[6];
     private TextView[] info_name_etc_course = new TextView[6];
     private TextView[] info_km_etc_course = new TextView[6];
+    private String[] etc_course_ids = new String[6];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,27 @@ public class CourseEtcActivity extends BaseActivity {
     private void initView() {
         local = getIntent().getIntExtra("local", -1);
         etc_local = (TextView) findViewById(R.id.etc_local);
+
+        switch (local) {
+            case 0 :
+                etc_local.setText("중구");
+                break;
+            case 1 :
+                etc_local.setText("성동구");
+                break;
+            case 2 :
+                etc_local.setText("관악구");
+                break;
+            case 3 :
+                etc_local.setText("노원구");
+                break;
+            case 4 :
+                etc_local.setText("성북구");
+                break;
+            case 5 :
+                etc_local.setText("중량구");
+                break;
+        }
 
         etc_course[0] = (NetworkImageView) findViewById(R.id.etc_course1);
         etc_course[1] = (NetworkImageView) findViewById(R.id.etc_course2);
@@ -97,8 +119,14 @@ public class CourseEtcActivity extends BaseActivity {
                     protected void onPostExecute(Object o) {
                         super.onPostExecute(o);
 
-
                         int count = 0;
+                        for (Properties p : list){
+                            etc_course_ids[count] = p.getProperty("id");
+                            count++;
+                        }
+
+
+                        count = 0;
                         for(Properties p : list) {
                             setCourseImageURL(etc_course[count], p.getProperty("picture"));
                             info_name_etc_course[count].setText(p.getProperty("name"));
@@ -120,6 +148,7 @@ public class CourseEtcActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CourseDetailActivity.class);
                 intent.putExtra("id", id);
+                intent.putExtra("cids", etc_course_ids);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }

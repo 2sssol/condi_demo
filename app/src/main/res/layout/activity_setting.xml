@@ -236,19 +236,21 @@
                     android:textColor="#fff"
                     android:textSize="18sp" />
 
-                <LinearLayout
-                    android:layout_width="fill_parent"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/setting3_1"
                     android:orientation="horizontal"
                     android:layout_marginStart="50dp"
                     android:layout_below="@+id/setting_top3"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="콕 메세지 알림 끄기"
+                        android:layout_gravity="start"
                         android:textSize="18sp"/>
 
                     <ImageButton
@@ -257,12 +259,13 @@
                         android:src="@drawable/checkbox_setting_off"
                         android:id="@+id/alarm_off_cock"
                         android:scaleType="fitCenter"
-                        android:layout_marginStart="90dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="20dp"
                         android:background="@null" />
-                </LinearLayout>
+                </RelativeLayout>
 
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/setting3_2"
@@ -281,14 +284,15 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/checkbox_setting_off"
-                        android:id="@+id/alarm_off_system"
+                        android:layout_gravity="end"
                         android:scaleType="fitCenter"
-                        android:layout_marginStart="55dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="20dp"
                         android:background="@null" />
-                </LinearLayout>
+                </RelativeLayout>
 
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/setting3_3"
@@ -309,9 +313,11 @@
                         android:src="@drawable/checkbox_setting_off"
                         android:id="@+id/alarm_off_promise"
                         android:scaleType="fitCenter"
-                        android:layout_marginStart="130dp"
+                        android:layout_gravity="end"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="20dp"
                         android:background="@null" />
-                </LinearLayout>
+                </RelativeLayout>
 
             </RelativeLayout>
 

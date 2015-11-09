@@ -2,10 +2,21 @@ package condi.kr.ac.swu.condidemo.activity;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
@@ -22,34 +33,148 @@ import condi.kr.ac.swu.condidemo.data.NetworkAction;
 
 public class CourseDetailActivity extends BaseActivity {
 
-    private int id;
+
+    int MAX_PAGE=3;
+    Fragment cur_fragment=new Fragment();
+
+    private String id;
+    private String[] cids;
     private TextView info_each_name, info_each_km, txtCourseInfoDetail1, txtCourseInfoDetail2;
     private NetworkImageView imgCourseDetail;
+    private ImageView icon_info_each_photo1, icon_info_each_photo2, icon_info_each_photo3, icon_info_each_photo4, icon_info_each_photo5, icon_info_each_photo6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_detail);
         initActionBar("코스 정보");
-        id = Integer.parseInt(getIntent().getStringExtra("id"));
-        initView();
+
+        ViewPager viewPager=(ViewPager)findViewById(R.id.viewPager);
+        viewPager.setAdapter(new adapter(getSupportFragmentManager()));
+
+
+        id = getIntent().getStringExtra("id");
+        cids = getIntent().getStringArrayExtra("cids");
+
+        int position = 0;
+        for(int i =0; i < cids.length; i++) {
+            if (id.equals(cids[i]))
+                position = i;
+        }
+        viewPager.setCurrentItem(position);
+
+        //initView();
     }
 
-    private void initView() {
-        info_each_name = (TextView) findViewById(R.id.info_each_name);
-        info_each_km = (TextView) findViewById(R.id.info_each_km);
-        txtCourseInfoDetail1 = (TextView) findViewById(R.id.txtCourseInfoDetail1);
-        txtCourseInfoDetail2 = (TextView) findViewById(R.id.txtCourseInfoDetail2);
-        imgCourseDetail = (NetworkImageView) findViewById(R.id.imgCourseDetail);
+    private class adapter extends FragmentPagerAdapter {
 
-        setInfo();
+        public adapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public android.support.v4.app.Fragment getItem(final int position) {
+            if(position<0 || MAX_PAGE<=position)
+                return null;
+
+            cur_fragment=new Fragment() {
+                @Override
+                public void onCreate(Bundle savedInstanceState) {
+                    super.onCreate(savedInstanceState);
+                }
+
+                @Nullable
+                @Override
+                public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+                    LinearLayout linearLayout=(LinearLayout)inflater.inflate(R.layout.course_detail, container, false);
+                    initView(linearLayout, cids[position], position);
+
+                    return linearLayout;
+                }
+            };
+
+            return cur_fragment;
+        }
+
+        @Override
+        public int getCount() {
+            return MAX_PAGE;
+        }
     }
 
-    private void setInfo() {
+    private void initView(LinearLayout linearLayout, String cid, int index) {
+        info_each_name = (TextView) linearLayout.findViewById(R.id.info_each_name);
+        info_each_km = (TextView) linearLayout.findViewById(R.id.info_each_km);
+        txtCourseInfoDetail1 = (TextView) linearLayout.findViewById(R.id.txtCourseInfoDetail1);
+        txtCourseInfoDetail2 = (TextView) linearLayout.findViewById(R.id.txtCourseInfoDetail2);
+        imgCourseDetail = (NetworkImageView) linearLayout.findViewById(R.id.imgCourseDetail);
+
+        icon_info_each_photo1 = (ImageView) linearLayout.findViewById(R.id.icon_info_each_photo1);
+        icon_info_each_photo2 = (ImageView) linearLayout.findViewById(R.id.icon_info_each_photo2);
+        icon_info_each_photo3 = (ImageView) linearLayout.findViewById(R.id.icon_info_each_photo3);
+        icon_info_each_photo4 = (ImageView) linearLayout.findViewById(R.id.icon_info_each_photo4);
+        icon_info_each_photo5 = (ImageView) linearLayout.findViewById(R.id.icon_info_each_photo5);
+        icon_info_each_photo6 = (ImageView) linearLayout.findViewById(R.id.icon_info_each_photo6);
+
+        switch (index) {
+            case 0:
+                icon_info_each_photo1.setImageResource(R.drawable.info_each_circle_big);
+                icon_info_each_photo2.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo3.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo4.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo5.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo6.setImageResource(R.drawable.info_each_circle_small);
+                break;
+            case 1:
+                icon_info_each_photo1.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo2.setImageResource(R.drawable.info_each_circle_big);
+                icon_info_each_photo3.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo4.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo5.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo6.setImageResource(R.drawable.info_each_circle_small);
+                break;
+            case 2:
+                icon_info_each_photo1.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo2.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo3.setImageResource(R.drawable.info_each_circle_big);
+                icon_info_each_photo4.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo5.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo6.setImageResource(R.drawable.info_each_circle_small);
+                break;
+            case 3:
+                icon_info_each_photo1.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo2.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo3.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo4.setImageResource(R.drawable.info_each_circle_big);
+                icon_info_each_photo5.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo6.setImageResource(R.drawable.info_each_circle_small);
+                break;
+            case 4:
+                icon_info_each_photo1.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo2.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo3.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo4.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo5.setImageResource(R.drawable.info_each_circle_big);
+                icon_info_each_photo6.setImageResource(R.drawable.info_each_circle_small);
+                break;
+            case 5:
+                icon_info_each_photo1.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo2.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo3.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo4.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo5.setImageResource(R.drawable.info_each_circle_small);
+                icon_info_each_photo6.setImageResource(R.drawable.info_each_circle_big);
+                break;
+        }
+
+        setInfo(cid);
+    }
+
+    private void setInfo(final String cid) {
         new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] objects) {
-                String dml = "select * from course where id="+id;
+                String dml = "select * from course where id="+cid;
                 return NetworkAction.sendDataToServer("course.php", dml);
             }
 

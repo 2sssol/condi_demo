@@ -29,6 +29,7 @@ public class CourseThisActivity extends BaseActivity implements View.OnClickList
     private TextView[] kms = new TextView[4];
 
     private ImageView[] regions = new ImageView[6];
+    private String[] etc_course_ids = new String[6];
 
     private int local;
 
@@ -74,6 +75,12 @@ public class CourseThisActivity extends BaseActivity implements View.OnClickList
                             super.onPostExecute(o);
 
                             int count=0;
+                            for (Properties p : list){
+                                etc_course_ids[count] = p.getProperty("id");
+                                count++;
+                            }
+
+                            count = 0;
                             for(Properties p : list) {
                                 setCourseImageURL(courses[count], p.getProperty("picture"));
                                 names[count].setText(p.getProperty("name"));
@@ -134,6 +141,7 @@ public class CourseThisActivity extends BaseActivity implements View.OnClickList
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CourseDetailActivity.class);
                 intent.putExtra("id", p.getProperty("id"));
+                intent.putExtra("cids", etc_course_ids);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }

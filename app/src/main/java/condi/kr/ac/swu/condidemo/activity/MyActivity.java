@@ -204,7 +204,6 @@ public class MyActivity extends BaseActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             walk = Integer.parseInt(intent.getStringExtra("walk"));
-            txtCurrentKM.setText(String.format("%s", ( Math.round(walk * 0.011559 * 100)/100)));
             myStep.setText(String.format("%s", walk));
 
             currentKM = (float) (walk * 0.011559);//Math.round(currentStep * 0.011559 * 100)/100;
