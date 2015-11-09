@@ -123,6 +123,16 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar);
         ((TextView)findViewById(R.id.titleText)).setText(title);
+        ((ImageButton) findViewById(R.id.icon_home)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         ((ImageButton) findViewById(R.id.sidemenu)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -287,6 +297,8 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         super.onStop();
         unregisterReceiver(cockReceiver);
         unregisterReceiver(goalReceiver);
+        if(slidingMenu.isMenuShowing())
+            slidingMenu.toggle();
     }
 
 

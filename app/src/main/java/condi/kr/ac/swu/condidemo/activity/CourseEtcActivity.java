@@ -130,7 +130,7 @@ public class CourseEtcActivity extends BaseActivity {
                         for(Properties p : list) {
                             setCourseImageURL(etc_course[count], p.getProperty("picture"));
                             info_name_etc_course[count].setText(p.getProperty("name"));
-                            info_km_etc_course[count].setText(p.getProperty("km")+" KM");
+                            info_km_etc_course[count].setText(p.getProperty("km")+" km");
                             setCourseEvent(p.getProperty("id"), etc_course[count]);
 
                             count++;

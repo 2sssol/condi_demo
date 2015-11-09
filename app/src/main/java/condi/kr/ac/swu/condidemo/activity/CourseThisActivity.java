@@ -150,6 +150,7 @@ public class CourseThisActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        super.onClick(v);
         switch (v.getId()) {
             case R.id.course_this_other1 :
                 local = 0;

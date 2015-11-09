@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ public class CourseDetailActivity extends BaseActivity {
 
     private int MAX_PAGE=6;
     private Fragment cur_fragment=new Fragment();
+    private ViewPager viewPager;
 
     private String id;
     private String[] cids;
@@ -43,15 +45,16 @@ public class CourseDetailActivity extends BaseActivity {
     private NetworkImageView imgCourseDetail;
     private ImageView icon_info_each_photo1, icon_info_each_photo2, icon_info_each_photo3, icon_info_each_photo4, icon_info_each_photo5, icon_info_each_photo6;
 
+    private ImageButton btnBreforeCourseDetail, btnAfterCourseDetail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_detail);
         initActionBar("코스 정보");
 
-        ViewPager viewPager=(ViewPager)findViewById(R.id.viewPager);
+        viewPager=(ViewPager)findViewById(R.id.viewPager);
         viewPager.setAdapter(new adapter(getSupportFragmentManager()));
-
 
         id = getIntent().getStringExtra("id");
         cids = getIntent().getStringArrayExtra("cids");
@@ -63,9 +66,9 @@ public class CourseDetailActivity extends BaseActivity {
             if (id.equals(cids[i]))
                 position = i;
         }
-        viewPager.setCurrentItem(position);
+        printErrorMsg("position" + position);
+        viewPager.setCurrentItem(R.layout.course_detail);
 
-        //initView();
     }
 
     private class adapter extends FragmentPagerAdapter {
@@ -118,6 +121,12 @@ public class CourseDetailActivity extends BaseActivity {
         icon_info_each_photo4 = (ImageView) linearLayout.findViewById(R.id.icon_info_each_photo4);
         icon_info_each_photo5 = (ImageView) linearLayout.findViewById(R.id.icon_info_each_photo5);
         icon_info_each_photo6 = (ImageView) linearLayout.findViewById(R.id.icon_info_each_photo6);
+
+        btnBreforeCourseDetail = (ImageButton) linearLayout.findViewById(R.id.btnBreforeCourseDetail);
+        btnAfterCourseDetail = (ImageButton) linearLayout.findViewById(R.id.btnAfterCourseDetail);
+
+        btnBreforeCourseDetail.setOnClickListener(this);
+        btnAfterCourseDetail.setOnClickListener(this);
 
         switch (index) {
             case 0:
@@ -221,16 +230,13 @@ public class CourseDetailActivity extends BaseActivity {
                         super.onPostExecute(o);
 
                         info_each_name.setText(list.get(0).getProperty("name"));
-                        info_each_km.setText(list.get(0).getProperty("km"));
+                        info_each_km.setText(list.get(0).getProperty("km")+" KM");
                         setCourseImageURL(imgCourseDetail,list.get(0).getProperty("picture") );
 
                         String info1, info2;
                         if(list.get(0).getProperty("info").length()>20) {
                             info1 = list.get(0).getProperty("info").substring(0, 19);
-                            if(list.get(0).getProperty("info").length()>40)
-                                info2 = list.get(0).getProperty("info").substring(19, 40);
-                            else
-                                info2 = list.get(0).getProperty("info").substring(19, list.get(0).getProperty("info").length()-1);
+                            info2 = list.get(0).getProperty("info").substring(19);
                         } else {
                             info1 = list.get(0).getProperty("info");
                             info2 = "";
@@ -252,4 +258,21 @@ public class CourseDetailActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+
+        if(v==btnBreforeCourseDetail) {
+            if(viewPager.getCurrentItem()==0)
+                viewPager.setCurrentItem(MAX_PAGE-1);
+            else
+                viewPager.setCurrentItem(viewPager.getCurrentItem()-1);
+
+        } else if(v==btnAfterCourseDetail) {
+            if(viewPager.getCurrentItem()==MAX_PAGE-1)
+                viewPager.setCurrentItem(0);
+            else
+                viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
+        }
+    }
 }

@@ -12,7 +12,10 @@ import android.widget.TextView;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -41,6 +44,8 @@ public class MyActivity extends BaseActivity {
     private Handler graphHandler = new Handler();
     int percent = 0;
     float currentKM = 0.00f;
+
+    private TextView mytxt1, detailDate1, detailDate2;
 
 
     @Override
@@ -74,6 +79,14 @@ public class MyActivity extends BaseActivity {
         txtCourseName4 = (TextView) findViewById(R.id.txtCourseName42);
 
         setMy();
+
+        mytxt1 = (TextView) findViewById(R.id.mytxt1);
+        detailDate1 = (TextView) findViewById(R.id.detailDate1);
+        detailDate2 = (TextView) findViewById(R.id.detailDate2);
+
+        mytxt1.setText(Session.NICKNAME+"님, 여정을 방금시작하셨군요!");
+        detailDate1.setText(new SimpleDateFormat("dd").format(new Date()));
+        detailDate1.setText(new SimpleDateFormat("E").format(new Date()));
     }
 
     private void setDateKM () {

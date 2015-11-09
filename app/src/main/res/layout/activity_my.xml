@@ -15,7 +15,7 @@
             android:layout_height="246dp"
             android:contentDescription="@string/abc_search_hint"
             android:scaleType="centerCrop"
-            android:src="@drawable/background2" />
+            android:src="@drawable/background_my" />
 
 
         <!-- 그래프 -->
@@ -248,31 +248,83 @@
         android:layout_marginTop="20dp"/>
 
 
-    <TextView
-        android:id="@+id/mytxt"
-        android:text="누적된 걸음이 없습니다."
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:textColor="#4C4C4C"
-        android:textSize="28sp"
-        android:gravity="center"/>
-
-    <HorizontalScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp">
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="end">
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_marginTop="72dp"
+            android:layout_marginStart="32sp">
+            <TextView
+                android:id="@+id/mytxt1"
+                android:text=" 님, 여정을 방금시작하셨군요!"
+                android:layout_gravity="start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#4C4C4C"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/mytxt2"
+                android:text="오늘 하루 힘차게 걸어보세요."
+                android:layout_gravity="start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#4C4C4C"
+                android:textSize="20sp"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:background="#00c6c1"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginBottom="64dp"
+           android:layout_alignParentBottom="true"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="2dp"
+            android:layout_marginEnd="16dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:text="14"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textColor="#ffffff"
+                android:background="@drawable/circular_background2"
+                android:id="@+id/detailDate1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
+
+            <TextView
+                android:text="토"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textColor="#00c6c1"
+                android:id="@+id/detailDate2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
 
 
         </LinearLayout>
 
-    </HorizontalScrollView>
+
+
+
+    </RelativeLayout>
+
 
 
 </LinearLayout>
