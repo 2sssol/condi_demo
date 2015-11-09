@@ -70,7 +70,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     private void initMenu() {
         slidingMenu= new SlidingMenu(this);
         slidingMenu.setMode(SlidingMenu.RIGHT);
-        slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
         slidingMenu.setShadowWidthRes(R.dimen.shadow_width);
         slidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
         slidingMenu.setFadeDegree(0.35f);
@@ -126,7 +126,10 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         ((ImageButton) findViewById(R.id.sidemenu)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(slidingMenu.isMenuShowing())
+                    slidingMenu.toggle();
+                else
+                    slidingMenu.showMenu();
             }
         });
     }

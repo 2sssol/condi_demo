@@ -34,8 +34,8 @@ import condi.kr.ac.swu.condidemo.data.NetworkAction;
 public class CourseDetailActivity extends BaseActivity {
 
 
-    int MAX_PAGE=3;
-    Fragment cur_fragment=new Fragment();
+    private int MAX_PAGE=6;
+    private Fragment cur_fragment=new Fragment();
 
     private String id;
     private String[] cids;
@@ -55,6 +55,8 @@ public class CourseDetailActivity extends BaseActivity {
 
         id = getIntent().getStringExtra("id");
         cids = getIntent().getStringArrayExtra("cids");
+        for (String s : cids)
+            printErrorMsg("cids: "+s);
 
         int position = 0;
         for(int i =0; i < cids.length; i++) {
@@ -78,6 +80,7 @@ public class CourseDetailActivity extends BaseActivity {
                 return null;
 
             cur_fragment=new Fragment() {
+
                 @Override
                 public void onCreate(Bundle savedInstanceState) {
                     super.onCreate(savedInstanceState);
@@ -119,6 +122,9 @@ public class CourseDetailActivity extends BaseActivity {
         switch (index) {
             case 0:
                 icon_info_each_photo1.setImageResource(R.drawable.info_each_circle_big);
+                icon_info_each_photo1.getLayoutParams().height = 40;
+                icon_info_each_photo1.getLayoutParams().width = 40;
+
                 icon_info_each_photo2.setImageResource(R.drawable.info_each_circle_small);
                 icon_info_each_photo3.setImageResource(R.drawable.info_each_circle_small);
                 icon_info_each_photo4.setImageResource(R.drawable.info_each_circle_small);
@@ -128,6 +134,9 @@ public class CourseDetailActivity extends BaseActivity {
             case 1:
                 icon_info_each_photo1.setImageResource(R.drawable.info_each_circle_small);
                 icon_info_each_photo2.setImageResource(R.drawable.info_each_circle_big);
+                icon_info_each_photo2.getLayoutParams().height = 40;
+                icon_info_each_photo2.getLayoutParams().width = 40;
+
                 icon_info_each_photo3.setImageResource(R.drawable.info_each_circle_small);
                 icon_info_each_photo4.setImageResource(R.drawable.info_each_circle_small);
                 icon_info_each_photo5.setImageResource(R.drawable.info_each_circle_small);
@@ -137,6 +146,9 @@ public class CourseDetailActivity extends BaseActivity {
                 icon_info_each_photo1.setImageResource(R.drawable.info_each_circle_small);
                 icon_info_each_photo2.setImageResource(R.drawable.info_each_circle_small);
                 icon_info_each_photo3.setImageResource(R.drawable.info_each_circle_big);
+                icon_info_each_photo3.getLayoutParams().height = 40;
+                icon_info_each_photo3.getLayoutParams().width = 40;
+
                 icon_info_each_photo4.setImageResource(R.drawable.info_each_circle_small);
                 icon_info_each_photo5.setImageResource(R.drawable.info_each_circle_small);
                 icon_info_each_photo6.setImageResource(R.drawable.info_each_circle_small);
@@ -146,6 +158,9 @@ public class CourseDetailActivity extends BaseActivity {
                 icon_info_each_photo2.setImageResource(R.drawable.info_each_circle_small);
                 icon_info_each_photo3.setImageResource(R.drawable.info_each_circle_small);
                 icon_info_each_photo4.setImageResource(R.drawable.info_each_circle_big);
+                icon_info_each_photo4.getLayoutParams().height = 40;
+                icon_info_each_photo4.getLayoutParams().width = 40;
+
                 icon_info_each_photo5.setImageResource(R.drawable.info_each_circle_small);
                 icon_info_each_photo6.setImageResource(R.drawable.info_each_circle_small);
                 break;
@@ -155,6 +170,9 @@ public class CourseDetailActivity extends BaseActivity {
                 icon_info_each_photo3.setImageResource(R.drawable.info_each_circle_small);
                 icon_info_each_photo4.setImageResource(R.drawable.info_each_circle_small);
                 icon_info_each_photo5.setImageResource(R.drawable.info_each_circle_big);
+                icon_info_each_photo5.getLayoutParams().height = 40;
+                icon_info_each_photo5.getLayoutParams().width = 40;
+
                 icon_info_each_photo6.setImageResource(R.drawable.info_each_circle_small);
                 break;
             case 5:
@@ -164,6 +182,8 @@ public class CourseDetailActivity extends BaseActivity {
                 icon_info_each_photo4.setImageResource(R.drawable.info_each_circle_small);
                 icon_info_each_photo5.setImageResource(R.drawable.info_each_circle_small);
                 icon_info_each_photo6.setImageResource(R.drawable.info_each_circle_big);
+                icon_info_each_photo6.getLayoutParams().height = 40;
+                icon_info_each_photo6.getLayoutParams().width = 40;
                 break;
         }
 
