@@ -235,7 +235,6 @@ public class NetworkAction {
 
         try {
             result = client.execute(request, responseHandler);
-            System.out.println("==> 결과 :  "+result);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("post방식으로 데이터 로드 실패"+ e.getMessage());
