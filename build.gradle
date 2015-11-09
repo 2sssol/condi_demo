@@ -17,5 +17,6 @@ allprojects {
     repositories {
         jcenter()
         maven { url "http://jzaccone.github.io/SlidingMenu-aar" }
+        maven { url "https://jitpack.io" }
     }
 }

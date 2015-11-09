@@ -84,7 +84,7 @@
                         android:id="@+id/txtTotalDate2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="4"
+                        android:text="7"
                         android:textColor="#fafafa"
                         android:textSize="16sp" />
 
@@ -107,7 +107,7 @@
                         android:id="@+id/txtPercent2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="50"
+                        android:text="0"
                         android:textColor="#fafafa"
                         android:textSize="50sp" />
 
@@ -129,13 +129,14 @@
                         android:id="@+id/txtCurrentKM2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="0"
                         android:textColor="#fafafa"
                         android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="KM"
+                        android:text=" KM / "
                         android:textColor="#fafafa"
                         android:textSize="16sp" />
 
@@ -171,7 +172,7 @@
                         android:layout_marginEnd="8dp"/>
                     <TextView
                         android:id="@+id/myStep"
-                        android:text="20000"
+                        android:text="0"
                         android:textColor="#ffffff"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -246,45 +247,13 @@
         android:textSize="24sp"
         android:layout_marginTop="20dp"/>
 
-    <HorizontalScrollView
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/barchart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/mypageScrollView"
         android:layout_gravity="right"
-        android:layout_marginTop="20dp">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="bottom"
-            android:layout_alignParentEnd="true">
-
-            <LinearLayout
-                android:id="@+id/barChart"
-                android:layout_width="wrap_content"
-                android:layout_height="300dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="50dp"
-                android:gravity="bottom">
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:background="#ff30c9ff"/>
-
-            <LinearLayout
-                android:id="@+id/barDate"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:gravity="center">
-
-            </LinearLayout>
-
-        </LinearLayout>
-    </HorizontalScrollView>
+        android:layout_marginTop="20dp"/>
 
 
 </LinearLayout>
