@@ -39,13 +39,13 @@ public class CourseDetailActivity extends BaseActivity {
     private int MAX_PAGE=6;
     private Fragment cur_fragment=new Fragment();
     private ViewPager viewPager;
-    private int position = 0;
+    private static int fposition = 0;
 
     private String id;
-    private String[] cids;
-    private TextView info_each_name, info_each_km, txtCourseInfoDetail1, txtCourseInfoDetail2;
-    private NetworkImageView imgCourseDetail;
-    private ImageView icon_info_each_photo1, icon_info_each_photo2, icon_info_each_photo3, icon_info_each_photo4, icon_info_each_photo5, icon_info_each_photo6;
+    private static String[] cids;
+    private static TextView info_each_name, info_each_km, txtCourseInfoDetail1, txtCourseInfoDetail2;
+    private static NetworkImageView imgCourseDetail;
+    private static ImageView icon_info_each_photo1, icon_info_each_photo2, icon_info_each_photo3, icon_info_each_photo4, icon_info_each_photo5, icon_info_each_photo6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,25 +55,33 @@ public class CourseDetailActivity extends BaseActivity {
 
         id = getIntent().getStringExtra("id");
         cids = getIntent().getStringArrayExtra("cids");
-        for (String s : cids)
-            printErrorMsg("cids: "+s);
 
         for(int i =0; i < cids.length; i++) {
             if (id.equals(cids[i]))
-                position = i;
+                fposition = i;
         }
 
         viewPager = (ViewPager)findViewById(R.id.viewPager);
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                viewPager.setCurrentItem(position);
-            }
-        });
-
-        viewPager.setAdapter(new adapter(getSupportFragmentManager()));
+        adapter adapter = new adapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
 
 
+    }
+
+    public static class FirstFragment extends Fragment {
+        @Override
+        public void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+        }
+
+        @Nullable
+        @Override
+        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            LinearLayout linearLayout=(LinearLayout)inflater.inflate(R.layout.course_detail, container, false);
+            initView(linearLayout, cids[fposition], fposition);
+
+            return linearLayout;
+        }
     }
 
     private class adapter extends FragmentPagerAdapter {
@@ -84,8 +92,13 @@ public class CourseDetailActivity extends BaseActivity {
 
         @Override
         public android.support.v4.app.Fragment getItem(final int position) {
-            if(position<0 || MAX_PAGE<=position)
-                return null;
+
+            System.out.println("position" + position);
+            if(position<0 || MAX_PAGE<=position) {
+                cur_fragment = new FirstFragment();
+                viewPager.setCurrentItem(fposition);
+            }
+
 
             cur_fragment=new Fragment() {
 
@@ -115,7 +128,7 @@ public class CourseDetailActivity extends BaseActivity {
 
     }
 
-    public void initView(LinearLayout linearLayout, String cid, int index) {
+    private static void initView(LinearLayout linearLayout, String cid, int index) {
         info_each_name = (TextView) linearLayout.findViewById(R.id.info_each_name);
         info_each_km = (TextView) linearLayout.findViewById(R.id.info_each_km);
         txtCourseInfoDetail1 = (TextView) linearLayout.findViewById(R.id.txtCourseInfoDetail1);
@@ -200,7 +213,7 @@ public class CourseDetailActivity extends BaseActivity {
         setInfo(cid);
     }
 
-    private void setInfo(final String cid) {
+    private static void setInfo(final String cid) {
         new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] objects) {
@@ -250,7 +263,7 @@ public class CourseDetailActivity extends BaseActivity {
         }.execute();
     }
 
-    public void setCourseImageURL(final NetworkImageView imageView, final String imageURL) {
+    private static void setCourseImageURL(final NetworkImageView imageView, final String imageURL) {
         if (imageView != null && imageURL != null) {
             Application app = GlobalApplication.getGlobalApplicationContext();
             if (app == null)

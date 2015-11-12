@@ -21,8 +21,8 @@ public class MapActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-
-        imgMap = (NetworkImageView) findViewById(R.id.imgMapNext);
+        initActionBar("지도 완성");
+        imgMap = (NetworkImageView) findViewById(R.id.imgMap_map);
         setMapURL("map1.png");
     }
 

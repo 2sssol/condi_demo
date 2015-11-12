@@ -40,12 +40,19 @@ public class SuccessService extends Service {
                     if(result.equals("")||result.isEmpty())
                         result = "0";
 
-                    float km = (float)( Math.round(Integer.parseInt(result) * 0.011559 * 100)/100);
-                    float goal = Float.parseFloat(goalkm);
-                    Log.i("gaal", goalkm);
-                    Log.i("km", Float.toString(km));
+                    /*
+                    *
+                    * currentStep = Integer.parseInt(result);
+                    currentKM = (float) (Integer.parseInt(result) * 0.011559);//Math.round(currentStep * 0.011559 * 100)/100;
+                    percent = Math.round((km / goal) * 100);
+                    *
+                    * */
 
-                    if(km >= goal) {
+                    float km = (float) (Integer.parseInt(result) * 0.011559);;
+                    float goal = Float.parseFloat(goalkm);
+                    int percent = Math.round((km / goal) * 100);
+
+                    if(percent>=100) {
                         new AsyncTask() {
                             @Override
                             protected Object doInBackground(Object[] params) {
