@@ -183,4 +183,8 @@ public class AddFriendActivity extends RootActivity {
         finish();
     }
 
+    @Override
+    public void onBackPressed() {
+        redirectPreGroupActivity();
+    }
 }

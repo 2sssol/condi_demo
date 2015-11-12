@@ -379,6 +379,7 @@ public class PreGroupActivity extends RootActivity {
     };
 
 
+
     /*
     * 사용자 정보 로드
     * */

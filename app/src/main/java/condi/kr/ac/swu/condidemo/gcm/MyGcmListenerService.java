@@ -66,6 +66,9 @@ public class MyGcmListenerService extends GcmListenerService {
 
     /*
     type
+        0 :
+        1 : 푸쉬
+        2 : 부탁받음
         3 : 초대에 수락
         4 : 초대에 거절
         5 : 초대함
@@ -73,6 +76,8 @@ public class MyGcmListenerService extends GcmListenerService {
         7 : 코스 선택
         8 : 걸음 시작
         9 : 목표 달성
+        10 : 초대 취소
+        11 : 격려받음
     */
 
         int t =  Integer.parseInt(type);
