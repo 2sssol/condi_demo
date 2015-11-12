@@ -13,7 +13,7 @@
         android:background="@drawable/list_background">
 
         <ImageButton
-            android:id="@+id/btn_add_friend"
+            android:id="@+id/btn_add_friend_footer"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_centerHorizontal="true"

@@ -217,27 +217,21 @@ public class PreGroupActivity extends RootActivity {
 
                             if(count > 0) {
                                 btn_pre_add_friend_back.setVisibility(View.INVISIBLE);
-                                ViewGroup.LayoutParams params = btn_pre_add_friend_back.getLayoutParams();
-                                params.height = 0;
+                                btn_pre_add_friend_back.getLayoutParams().height = 0;
                             }
 
-                            if(count>=3) {
-                                footer.setVisibility(View.INVISIBLE);
-                            } else {
-                                footer.setVisibility(View.VISIBLE);
-                                footer.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                            Intent i = new Intent(PreGroupActivity.this.getApplicationContext(), AddFriendActivity.class);
-                                            i.putExtra("sender", senderId);
-                                            i.putExtra("count", count);
-                                            i.putExtra("isSender", isSender());
-                                            startActivity(i);
-                                            finish();
+                            ((ImageButton) footer.findViewById(R.id.btn_add_friend_footer)).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent i = new Intent(PreGroupActivity.this.getApplicationContext(), AddFriendActivity.class);
+                                    i.putExtra("sender", senderId);
+                                    i.putExtra("count", count);
+                                    i.putExtra("isSender", isSender());
+                                    startActivity(i);
+                                    finish();
 
-                                    }
-                                });
-                            }
+                                }
+                            });
 
                             inviteList.addFooterView(footer);
                             inviteList.setAdapter(adapter);
