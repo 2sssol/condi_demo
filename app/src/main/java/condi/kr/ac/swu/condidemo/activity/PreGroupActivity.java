@@ -34,6 +34,7 @@ public class PreGroupActivity extends RootActivity {
     private String senderId = "";
     private InviteListAdapter adapter;
     private ListView inviteList;
+    private View footer;
 
     // 프로필 관련 뷰
     private CircularNetworkImageView myProfile;
@@ -213,11 +214,12 @@ public class PreGroupActivity extends RootActivity {
                             final int count = list.size();
                             inviteList = (ListView) findViewById(R.id.inviteList);
                             adapter = new InviteListAdapter(PreGroupActivity.this.getApplicationContext(), list);
-                            View footer = getLayoutInflater().inflate(R.layout.invited_list_footer, null, false);
+                            footer = getLayoutInflater().inflate(R.layout.invited_list_footer, null, false);
 
                             if(count > 0) {
                                 btn_pre_add_friend_back.setVisibility(View.INVISIBLE);
-                                btn_pre_add_friend_back.getLayoutParams().height = 0;
+                            } else {
+                                btn_pre_add_friend_back.setVisibility(View.VISIBLE);
                             }
 
                             ((ImageButton) footer.findViewById(R.id.btn_add_friend_footer)).setOnClickListener(new View.OnClickListener() {
@@ -336,6 +338,15 @@ public class PreGroupActivity extends RootActivity {
         }.execute();
     }
 
+    private void updateList() {
+        inviteList.removeFooterView(footer);
+
+        if(isSender())  // 센더는 나면서 시작
+            loadInviteList();
+        else    // 센더정보받아온다음에 리스트 뿌려주기
+            new Receiver().execute();
+    }
+
     private void redirectSelectRegionActivity() {
         Intent intent = new Intent(getApplicationContext(), SelectRegionActivity.class);
         intent.putExtra("first", true);
@@ -357,10 +368,7 @@ public class PreGroupActivity extends RootActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(isSender())  // 센더는 나면서 시작
-                loadInviteList();
-            else    // 센더정보받아온다음에 리스트 뿌려주기
-                new Receiver().execute();
+            updateList();
         }
     };
 

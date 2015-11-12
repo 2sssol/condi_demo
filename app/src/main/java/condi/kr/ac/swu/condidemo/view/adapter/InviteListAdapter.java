@@ -129,11 +129,11 @@ public class InviteListAdapter extends BaseAdapter {
                     protected Object doInBackground(Object[] params) {
                         Properties p = new Properties();
                         String dml = "delete from invite where receiver = '"+receiver+"'";
-                        p.setProperty("dml", dml);
                         p.setProperty("sender", Session.ID);
                         p.setProperty("sendername", Session.NICKNAME);
                         p.setProperty("type", "10");
-                        return NetworkAction.sendDataToServer("gcm.php", p);
+
+                        return NetworkAction.sendDataToServer("gcm.php", p, dml);
                     }
 
                     @Override

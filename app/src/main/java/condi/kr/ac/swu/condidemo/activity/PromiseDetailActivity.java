@@ -147,4 +147,13 @@ public class PromiseDetailActivity extends BaseActivity implements View.OnClickL
 
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = new Intent(getApplicationContext(), PromiseActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

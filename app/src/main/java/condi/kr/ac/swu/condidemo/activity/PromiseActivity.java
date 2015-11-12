@@ -51,11 +51,10 @@ public class PromiseActivity extends BaseActivity {
         btn_add_promise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), AddPromiseActivity.class);
-                i.putExtra("mode", 1);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
-
+                Intent intent = new Intent(getApplicationContext(), AddPromiseActivity.class);
+                intent.putExtra("mode", 1);
+                startActivity(intent);
+                finish();
             }
         });
         setPromiseList();
@@ -111,9 +110,8 @@ public class PromiseActivity extends BaseActivity {
                                         printErrorMsg("i => " + i);
                                         Intent intent = new Intent(getApplicationContext(), PromiseDetailActivity.class);
                                         intent.putExtra("pid", promiseList.get(i).getProperty("id"));
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);
-
+                                        finish();
                                     }
                                 });
 
@@ -122,8 +120,8 @@ public class PromiseActivity extends BaseActivity {
                                     public void onClick(View v) {
                                         Intent i = new Intent(getApplicationContext(), AddPromiseActivity.class);
                                         i.putExtra("mode", 1);
-                                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(i);
+                                        finish();
                                     }
                                 });
                             }

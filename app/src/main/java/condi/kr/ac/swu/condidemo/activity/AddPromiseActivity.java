@@ -347,8 +347,18 @@ public class AddPromiseActivity extends AppCompatActivity
                 }
             }.execute();
         } else if (view == cancelPromise) {
-            startActivity(new Intent(getApplicationContext(), PromiseActivity.class));
+            Intent intent = new Intent(getApplicationContext(), PromiseActivity.class);
+            startActivity(intent);
             finish();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = new Intent(getApplicationContext(), PromiseActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

@@ -78,7 +78,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         txtCourseKM = (TextView) findViewById(R.id.txtCourseKM);
         btnMyWalk = (Button) findViewById(R.id.btnMyWalk);
         btnGroup = (Button) findViewById(R.id.btnGroup);
-        btnCoursePicture = (TextView) findViewById(R.id.btnCoursePicture);
 
         btnGroup.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -38,26 +38,6 @@
         android:background="#1e000000"
         >
 
-        <!-- 사진보기 -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageView
-                android:src="@drawable/icon_pictures"
-                android:scaleType="fitCenter"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginEnd="4dp"/>
-            <TextView
-                android:text="사진보기"
-                android:textSize="18sp"
-                android:id="@+id/btnCoursePicture"
-                android:textColor="#ffffff"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-
         <!-- 이전코스, 이후코스, 코스이름, 코스KM -->
         <LinearLayout
             android:layout_width="wrap_content"
