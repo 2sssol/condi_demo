@@ -185,6 +185,12 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+
+            if(lists.size()<1)
+                ((TextView) slidingMenu.findViewById(R.id.txt_msg)).setVisibility(View.VISIBLE);
+            else
+                ((TextView) slidingMenu.findViewById(R.id.txt_msg)).setVisibility(View.INVISIBLE);
+
             lv = (ListView) slidingMenu.findViewById(R.id.lvMsg);
             adapter = new MsgListAdapter(slidingMenu.getContext().getApplicationContext(), lists);
             lv.setAdapter(adapter);
@@ -249,7 +255,10 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                startActivity(new Intent(getApplicationContext(), GoalActivity.class));
+                Intent intent = new Intent(getApplicationContext(), GoalActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 finish();
             }
         });

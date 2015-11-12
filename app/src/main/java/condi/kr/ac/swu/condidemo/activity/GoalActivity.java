@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.NetworkImageView;
 
 import condi.kr.ac.swu.condidemo.R;
+import condi.kr.ac.swu.condidemo.data.BackPressCloseHandler;
 import condi.kr.ac.swu.condidemo.data.GlobalApplication;
 
 public class GoalActivity extends BaseActivity {
@@ -20,12 +21,14 @@ public class GoalActivity extends BaseActivity {
     private NetworkImageView imgMap;
     private Button startNext;
     private final String SERVER_ADDRESS = "http://condi.swu.ac.kr:80/condi2/picture/";
+    private BackPressCloseHandler backPressCloseHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goal);
         initActionBar("목표 완성");
+        backPressCloseHandler = new BackPressCloseHandler(this);
         initView();
     }
 
@@ -50,6 +53,16 @@ public class GoalActivity extends BaseActivity {
             startActivity(new Intent(getApplicationContext(), StartNewActivity.class));
             finish();
         }
+    }
 
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        if(slidingMenu.isMenuShowing()) {
+            slidingMenu.toggle();
+            return;
+        }
+
+        backPressCloseHandler.onBackPressed();
     }
 }

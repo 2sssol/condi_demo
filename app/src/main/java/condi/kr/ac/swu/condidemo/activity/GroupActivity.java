@@ -306,6 +306,8 @@ public class GroupActivity extends BaseActivity {
                             myView.changePercentage(percent);
                             myView.invalidate();
 
+                            if(percent>=100)
+                                percent=100;
                             txtPercent.setText(String.format("%s",percent));
                             txtCurrentKM.setText(String.format("%.2f", currentKM));
 

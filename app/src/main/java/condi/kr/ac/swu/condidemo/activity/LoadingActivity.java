@@ -51,14 +51,23 @@ public class LoadingActivity extends Activity {
         setContentView(R.layout.activity_loading);
         backPressCloseHandler = new BackPressCloseHandler(this);
         progressBar = (ProgressBar) findViewById(R.id.progLoading);
+        progressBar.setProgress(0);
         progressBar.setMax(100);
 
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while (percent <= 100) {
-                    percent+=10;
+                while (percent<=100) {
+                    percent+=5;
+
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -66,11 +75,7 @@ public class LoadingActivity extends Activity {
                         }
                     });
 
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+
                 }
             }
         }).start();
